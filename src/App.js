@@ -5,17 +5,13 @@ import Register from "./pages/register/Register";
 
 function App() {
   return (
-
     <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={""} />
         <Route path="/register" element={<Register/>} />
         <Route path="/my-account" element={""} />
         <Route path="/store" element={""} />
-
     </Routes>
-
   );
 }
 
