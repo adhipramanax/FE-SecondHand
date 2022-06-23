@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 // CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
-import './assets/css/global.style.css'
+import './assets/css/global.style.css';
 
 //Import React Router Dom
 import { BrowserRouter } from 'react-router-dom';
