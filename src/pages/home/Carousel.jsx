@@ -9,7 +9,7 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 // css
-import '../../assets/css/carousel.style.css'
+// import '../../assets/css/carousel.style.css'
 
 const Carousel = () => {
     return (
