@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import logo from '../../assets/images/logo.png'
 import fiLogin from '../../assets/images/fi_log-in.png';
 import offCanvas from '../../assets/images/Frame_133.png';
+import { Link } from "react-router-dom";
 
 import '../../assets/css/navbar.style.css';
+import Notif from '../Notif';
 
 const Navbar = () => {
     return (
@@ -21,7 +23,8 @@ const Navbar = () => {
                     {/* Desktop Nav Item */}
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav ms-auto">
-                            <a class="btn btn-color-purple"><img src={fiLogin} alt="logo" class='me-2' />Masuk</a>
+                            <Notif />
+                            <Link to="/login" class="btn btn-color-purple"><img src={fiLogin} alt="logo" class='me-2' />Masuk</Link>
                         </div>
                     </div>
                 </div>
@@ -34,7 +37,7 @@ const Navbar = () => {
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
-                    <a class="btn btn-color-purple"><img src={fiLogin} alt="logo" class='me-2' />Masuk</a>
+                    <Link to="/login" class="btn btn-color-purple"><img src={fiLogin} alt="logo" class='me-2' />Masuk</Link>
                 </div>
             </div>
 
