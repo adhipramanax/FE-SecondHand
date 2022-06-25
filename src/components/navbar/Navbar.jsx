@@ -5,6 +5,7 @@ import offCanvas from '../../assets/images/Frame_133.png';
 import { Link } from "react-router-dom";
 
 import '../../assets/css/navbar.style.css';
+import Notif from '../Notif';
 
 const Navbar = () => {
     return (
@@ -22,6 +23,7 @@ const Navbar = () => {
                     {/* Desktop Nav Item */}
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav ms-auto">
+                            <Notif />
                             <Link to="/login" class="btn btn-color-purple"><img src={fiLogin} alt="logo" class='me-2' />Masuk</Link>
                         </div>
                     </div>

@@ -1,11 +1,13 @@
-import Home from "./pages/home/Home";
 import { Route, Routes } from "react-router-dom";
-import DetailProduct from "./pages/detail-product/DetailProduct";
-import CreateProduct from "./pages/create-product/CreateProduct";
-import OfferProduct from "./pages/offer-product/OfferProduct";
-import ProductSale from "./pages/seller/product-sale/ProductSale";
-import Login from "./pages/login/Login";
-import Register from "./pages/register/Register";
+import Home from "./pages/Buyyer/Home";
+import Login from "./pages/Authorization/Login";
+import Register from "./pages/Authorization/Register";
+import Dashboard from "./pages/seller/dashboard"
+import CreateProduct from "./pages/seller/CreateProduct";
+import DetailProduct from "./pages/seller/DetailProduct";
+import OfferProduct from "./pages/seller/OfferProduct";
+// import StoreSellerViewbyBuyer from "./pages/Buyyer/StoreSellerView";
+// import DetailProductbyBuyer from "./pages/Buyyer/detail product by buyer";
 
 function App() {
   return (
@@ -13,8 +15,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
-        <Route path="/my-account" element={""} />
-        <Route path="/store" element={<ProductSale />} />
+
+        <Route path="/seller/store" element={<Dashboard />} />
         <Route path="/seller/create-product" element={<CreateProduct />} />
         <Route path="/seller/detail-product" element={<DetailProduct />} />
         <Route path="/seller/offer-product" element={<OfferProduct />} />
