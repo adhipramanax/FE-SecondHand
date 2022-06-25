@@ -11,6 +11,7 @@ const Input = styled.input`
     display: block;
     width: 100%;
     padding: 12px 30px 12px 10px;
+    margin-bottom: 15px;
     
     &:focus {
         outline: none;
@@ -21,7 +22,8 @@ const Input = styled.input`
 
 const Icon = styled.i`
     position: absolute;
-    bottom: 30px;
+    right: 10px;
+    bottom: 13px;
     margin-top: 5px;
 `
 
