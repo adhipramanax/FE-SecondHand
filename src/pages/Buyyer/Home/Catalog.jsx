@@ -1,5 +1,5 @@
 import React from 'react';
-import CardCatalog from '../../components/card/CardCatalog';
+import CardCatalog from '../../../components/card/CardCatalog';
 
 const Catalog = () => {
     return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import fiSearch from '../../assets/images/fi_search.png';
+import fiSearch from '../../../assets/images/fi_search.png';
 
 // owl carousel
 import OwlCarousel from 'react-owl-carousel';

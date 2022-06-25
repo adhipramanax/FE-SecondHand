@@ -1,7 +1,6 @@
 import React from 'react';
-import profile from '../../assets/images/Rectangle_33.png';
-import casio from '../../assets/images/Rectangle_134.png'
-import SellerCard from '../../components/seller card/SellerCard';
+import casio from '../../../assets/images/Rectangle_134.png'
+import SellerCard from '../../../components/seller card/SellerCard';
 
 
 const CardDetail = () => {

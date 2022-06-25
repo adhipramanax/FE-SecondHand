@@ -1,20 +1,17 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import casioWOne from '../../../assets/images/Rectangle_24.png';
-import fiSearch from '../../../assets/images/fi_search.png';
 import fiUser from '../../../assets/images/fi_user.png';
 import fiBox from '../../../assets/images/fi_box.png';
 import vector from '../../../assets/images/Vector.png';
 import fiDollar from '../../../assets/images/fi_dollar-sign.png';
 import fiLeft from '../../../assets/images/fi_chevron-right.png';
-
+import MainLayout from '../../../layouts/Main.layout';
 
 // owl carousel
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import CardSeller from './CardSeller';
-import StoreCard from '../../../components/store card/StoreCard';
 import Catalog from './Catalog';
 import Profile from './Profile';
 import WishList from './WishList';
@@ -26,15 +23,14 @@ const filter_btn = {
     width: "25px"
 };
 
-const ContentProductSale = () => {
+const Index = () => {
 
     let { hash } = useLocation()
 
     return (
         <>
-            <section className="store-content">
+        <MainLayout>            <section className="store-content">
                 <CardSeller />
-
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
@@ -155,8 +151,9 @@ const ContentProductSale = () => {
                     </div>
                 </div>
             </section>
+        </MainLayout>
         </>
     );
 }
 
-export default ContentProductSale;
+export default Index;
