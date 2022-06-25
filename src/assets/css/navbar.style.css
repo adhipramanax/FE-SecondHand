@@ -10,7 +10,6 @@
 }
 
 .input-search {
-    color: #EEEEEE;
     background-color: #EEEEEE !important;
     border: 1px solid #EEEEEE;
     border-radius: 16px;
@@ -34,7 +33,7 @@
 
 @media only screen and (max-width: 576px) {
     .input-search{
-        width: 80%;
+        width: 75%;
     }
 }
 
