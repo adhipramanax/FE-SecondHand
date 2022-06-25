@@ -94,7 +94,6 @@ const Index = () => {
                                 bg="#4B1979"
                                 width="100%"
                                 text="Daftar"
-
                                 />
                             </div>
                             <div className='register-to-login text-center'>
