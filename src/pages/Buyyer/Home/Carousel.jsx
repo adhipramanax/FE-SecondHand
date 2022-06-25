@@ -1,7 +1,7 @@
 import React from 'react';
-import banner from '../../assets/images/img_banner.png';
-import lBanner from '../../assets/images/Rectangle_129.png';
-import rBanner from '../../assets/images/Rectangle_130.png';
+import banner from '../../../assets/images/img_banner.png';
+import lBanner from '../../../assets/images/Rectangle_129.png';
+import rBanner from '../../../assets/images/Rectangle_130.png';
 
 // owl carousel
 import OwlCarousel from 'react-owl-carousel';

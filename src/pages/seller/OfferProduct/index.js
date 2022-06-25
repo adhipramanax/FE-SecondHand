@@ -1,8 +1,8 @@
 import React from 'react';
-import MainLayout from '../../layouts/Main.layout';
+import MainLayout from '../../../layouts/Main.layout';
 import CardOffer from './CardOffer';
 
-const OfferProduct = () => {
+const Index = () => {
     return (
         <>
             <MainLayout>
@@ -12,4 +12,4 @@ const OfferProduct = () => {
     );
 }
 
-export default OfferProduct;
+export default Index;

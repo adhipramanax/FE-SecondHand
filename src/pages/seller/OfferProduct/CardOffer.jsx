@@ -1,8 +1,8 @@
 import React from 'react';
-import backBtn from '../../assets/images/fi_arrow-left.png';
-import profile from '../../assets/images/Rectangle_32.png';
-import profileImg from '../../assets/images/Rectangle-33.png';
-import whatsApp from '../../assets/images/Whatsapp.png'
+import backBtn from '../../../assets/images/fi_arrow-left.png';
+import profile from '../../../assets/images/Rectangle_32.png';
+import profileImg from '../../../assets/images/Rectangle-33.png';
+import whatsApp from '../../../assets/images/Whatsapp.png'
 
 const CardOffer = () => {
     return (

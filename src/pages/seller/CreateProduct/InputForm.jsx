@@ -1,5 +1,5 @@
 import React from 'react';
-import backBtn from '../../assets/images/fi_arrow-left.png';
+import backBtn from '../../../assets/images/fi_arrow-left.png';
 
 const InputForm = () => {
     return (

@@ -5,7 +5,7 @@ const Catalog = () => {
     return (
         <>
             <div class="col-6 col-md-4">
-                <a href="/create-product" class="btn-add-product text-decoration-none mb-4">
+                <a href="/seller/create-product" class="btn-add-product text-decoration-none mb-4">
                     <div class="btn-add-product-icon">
                         +
                     </div>
@@ -15,7 +15,7 @@ const Catalog = () => {
                 </a>
             </div>
             <div class="col-6 col-md-4">
-                <a href="" class="text-dark text-decoration-none">
+                <a href="/seller/detail-product" class="text-dark text-decoration-none">
                     <div class="card catalog-card">
                         <img src={casioWOne} class="card-img-top" alt="jam-tangan" />
                         <div class="card-body">
@@ -30,7 +30,7 @@ const Catalog = () => {
 
             </div>
             <div class="col-6 col-md-4">
-                <a href="" class="text-dark text-decoration-none">
+                <a href="/seller/detail-product" class="text-dark text-decoration-none">
                     <div class="card catalog-card">
                         <img src={casioWOne} class="card-img-top" alt="jam-tangan" />
                         <div class="card-body">
@@ -44,7 +44,7 @@ const Catalog = () => {
                 </a>
             </div>
             <div class="col-6 col-md-4">
-                <a href="" class="text-dark text-decoration-none">
+                <a href="/seller/detail-product" class="text-dark text-decoration-none">
                     <div class="card catalog-card">
                         <img src={casioWOne} class="card-img-top" alt="jam-tangan" />
                         <div class="card-body">
@@ -58,7 +58,7 @@ const Catalog = () => {
                 </a>
             </div>
             <div class="col-6 col-md-4">
-                <a href="" class="text-dark text-decoration-none">
+                <a href="/seller/detail-product" class="text-dark text-decoration-none">
                     <div class="card catalog-card">
                         <img src={casioWOne} class="card-img-top" alt="jam-tangan" />
                         <div class="card-body">
@@ -72,7 +72,7 @@ const Catalog = () => {
                 </a>
             </div>
             <div class="col-6 col-md-4">
-                <a href="" class="text-dark text-decoration-none">
+                <a href="/seller/detail-product" class="text-dark text-decoration-none">
                     <div class="card catalog-card">
                         <img src={casioWOne} class="card-img-top" alt="jam-tangan" />
                         <div class="card-body">

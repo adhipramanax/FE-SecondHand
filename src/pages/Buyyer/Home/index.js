@@ -1,11 +1,11 @@
 import React from 'react';
-import MainLayout from '../../layouts/Main.layout';
+import MainLayout from '../../../layouts/Main.layout';
 import Carousel from './Carousel';
 import Category from './Category';
 import Catalog from './Catalog';
-import '../../assets/css/home.style.css'
+import '../../../assets/css/home.style.css'
 
-const Home = () => {
+const Index = () => {
     return (
         <>
             <MainLayout>
@@ -27,4 +27,4 @@ const Home = () => {
     );
 }
 
-export default Home;
+export default Index;

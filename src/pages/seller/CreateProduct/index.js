@@ -1,8 +1,8 @@
 import React from 'react';
-import MainLayout from '../../layouts/Main.layout';
+import MainLayout from '../../../layouts/Main.layout';
 import InputForm from './InputForm';
 
-const CreateProduct = () => {
+const Index = () => {
     return (
         <>
             <MainLayout>
@@ -12,4 +12,4 @@ const CreateProduct = () => {
     );
 }
 
-export default CreateProduct;
+export default Index;
