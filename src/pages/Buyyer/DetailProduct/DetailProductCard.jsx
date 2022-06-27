@@ -62,7 +62,7 @@ const DetailProductCard = () => {
                                         </div>
                                         <div class="modal-body">
                                             <h5>Masukkan Harga Tawarmu</h5>
-                                            <p class="text-muted">Harga tawaranmu akan diketahui penjual, jika penjual cocok kamu akan segera dihubungi penjual</p>
+                                            <p class="text-muted">Harga tawaranmu akan diketahui penjual, jika penjual cocok kamu akan segera dihubungi penjual.</p>
                                             <div class="card offer-modal">
                                                 <div class="card-body">
                                                     {/* <h5 class="text-center">Product Match</h5> */}
