@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import casio from '../../../assets/images/Rectangle_134.png'
 import SellerCard from '../../../components/seller card/SellerCard';
+import Input from '../../../components/Input/index'
 
 import profile from '../../../assets/images/Rectangle_32.png';
 import profileImg from '../../../assets/images/Rectangle-33.png';
@@ -8,6 +9,13 @@ import whatsApp from '../../../assets/images/Whatsapp.png'
 
 
 const DetailProductCard = () => {
+    const [price, setPrice] = useState('');
+
+    const handlePrice = (e) => {
+        setPrice(e.target.value)
+    }
+
+
     return (
         <>
             <section class="card-detail-product">
@@ -78,8 +86,14 @@ const DetailProductCard = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <p class="my-2">Harga Tawar</p>
-                                            <input type="text" class="input-style mt-0" placeholder='Rp. 0,00' />
+                                            <Input
+                                                label="Harga Tawar"
+                                                type="price"
+                                                name="price"
+                                                id="price"
+                                                placeholder="Rp. 0,00"
+                                                onChange={(value) => handlePrice(value) }
+                                            />
                                         </div>
                                         <div class="m-4">
                                             <button type="button" class="btn btn-color-purple w-100">Kirim</button>
