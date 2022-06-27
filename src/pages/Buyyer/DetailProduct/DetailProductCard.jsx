@@ -49,7 +49,7 @@ const DetailProductCard = () => {
                                     <p class="card-text text-muted">Aksesoris</p>
                                     <h5 class="card-title">Rp. 250.000</h5>
                                     {/* <!-- Button trigger modal --> */}
-                                    <button type="button" class="btn btn-color-purple w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    <button type="button" class="btn btn-color-purple w-100 mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                         Saya tertarik dan ingin nego
                                     </button>
 
