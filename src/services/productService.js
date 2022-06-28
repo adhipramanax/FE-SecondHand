@@ -9,7 +9,7 @@ export async function getProductSold() {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
-        }) 
+        })
 
     } catch (error) {
         return error.response
@@ -22,8 +22,20 @@ export async function getOfferProduct() {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
-        }) 
+        })
 
+    } catch (error) {
+        return error.response
+    }
+}
+
+export async function getProductSeller() {
+    try {
+        return await axios.get(`${baseURL}/seller/product`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
     } catch (error) {
         return error.response
     }
