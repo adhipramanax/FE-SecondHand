@@ -1,21 +1,22 @@
-import React from 'react';
-import casioWOne from '../../assets/images/Rectangle_23.png'
+import React from "react";
 
-const Index = ({optionCol}) => {
+const Index = ({ optionCol, urlImage, title, category, price, urlLink }) => {
     return (
         <>
             <div class={`col-6 col-md-4 ${optionCol}`}>
-                <div class="card catalog-card">
-                    <img src={casioWOne} class="card-img-top" alt="jam-tangan" />
-                    <div class="card-body">
-                        <h5 className='catalog-title'>Jam Tangan Casio</h5>
-                        <p class="card-text text-muted">Aksesoris</p>
-                        <h5>Rp. 250.000</h5>
+                <a href={urlLink} class="text-dark text-decoration-none">
+                    <div class="card catalog-card">
+                        <img src={urlImage} class="card-img-top" alt="jam-tangan" />
+                        <div class="card-body">
+                            <h5 className="catalog-title">{title}</h5>
+                            <p class="card-text text-muted">{category}</p>
+                            <h5>Rp. {price}</h5>
+                        </div>
                     </div>
-                </div>
-            </div>   
+                </a>
+            </div>
         </>
     );
-}
+};
 
 export default Index;
