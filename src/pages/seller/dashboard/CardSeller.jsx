@@ -12,14 +12,13 @@ const CardSeller = () => {
 
                             <div class="card mt-4 card-detail">
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-2 col-lg-1">
+                                    <div class="row justify-content-between">
+                                        <div class="col-9 col-lg-10 d-flex gap-2">
                                             <img src={profile} alt="profile" />
-                                        </div>
-
-                                        <div class="col-7 col-lg-9">
-                                            <h5 class="mb-0">Eko</h5>
-                                            <p class="card-text text-muted mb-0">Bekasi</p>
+                                            <div>
+                                                <h5 class="mb-0">Eko</h5>
+                                                <p class="card-text text-muted mb-0">Bekasi</p>
+                                            </div>
                                         </div>
 
                                         <div class="col-3 col-lg-2 text-end">
@@ -28,10 +27,10 @@ const CardSeller = () => {
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
-                </div>                        
+                </div>
             </section>
         </>
     );
