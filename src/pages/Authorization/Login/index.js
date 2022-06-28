@@ -6,10 +6,17 @@ import Button from '../../../components/ActionButton'
 
 import imgLogin from '../../../assets/images/login.png';
 import '../../../assets/css/register.style.css';
+import { loginService } from '../../../services/authService';
+
+import { authContext } from '../../../provider/authProvider';
 
 const Index = () => {
+    const statusLogin = React.useContext(authContext)    
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [status, setStatus] = useState('');
+    const [message, setMessage] = useState([]);
     const [type, setType] = useState('password');
     const [eyeIcon, setEyeIcon] = useState('bi-eye');
     const navigate = useNavigate();
@@ -38,10 +45,22 @@ const Index = () => {
         setPassword(e.target.value)
     }
 
-    console.log(type)
+    const handleSubmit = (e) => {
+        const data = {
+            email,
+            password
+        }
+
+        loginService(data).then((response) => {
+                localStorage.setItem('token', response.data.token)
+                statusLogin.setIsLogin(true)
+        })
+
+    }
 
     return (
         <>
+            {console.log(statusLogin.isLogin)}
             <div className='container-fluid position-relative'>
                 <div className="row ">
                     <div className="col-6 p-0 img-block">
@@ -59,6 +78,7 @@ const Index = () => {
                             name="email"
                             id="email"
                             placeholder="Contoh: Johnshon@gamil.com"
+                            value={email}
                             onChange={(value) => handleEmail(value) }
                             />
 
@@ -68,6 +88,7 @@ const Index = () => {
                             name="password"
                             id="password"
                             placeholder="Masukan password"
+                            value={password}
                             icon={`bi ${eyeIcon}`}
                             onClick={(e) => handleType(e)}
                             onChange={(value) => handlePassword(value) }
@@ -78,6 +99,7 @@ const Index = () => {
                                 bg="#4B1979"
                                 text="Masuk"
                                 width="100%"
+                                onClick={(e) => handleSubmit(e)}
                                 />
                             </div>
                             <div className='register-to-login text-center'>

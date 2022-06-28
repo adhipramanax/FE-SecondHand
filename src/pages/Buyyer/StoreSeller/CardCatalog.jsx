@@ -16,7 +16,6 @@ const CardCatalog = () => {
                     </div>  
             </a>
         </div>
-            
         </>
     );
 }

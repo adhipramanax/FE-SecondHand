@@ -24,14 +24,15 @@ const Icon = styled.i`
     position: absolute;
     right: 10px;
     bottom: 13px;
+    margin-top: 5px;
 `
 
-const Index = ({label, type, name, id, placeholder, icon, onChange, onClick}) => {
+const Index = ({label, type, name, id, value, placeholder, icon, onChange, onClick}) => {
     return (
         <>
             <Wrapper class="mb-3">
                 <label for={id} class="form-label">{ label }</label>
-                <Input type={type} class="form-control" name={name} id={id} placeholder={placeholder} onChange={onChange} />
+                <Input type={type} class="form-control" name={name} id={id} value={value} placeholder={placeholder} onChange={onChange} />
                 <Icon className={icon} onClick={onClick}></Icon>
             </Wrapper>
         </>
