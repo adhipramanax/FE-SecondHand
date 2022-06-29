@@ -1,21 +1,33 @@
-import React from 'react';
-import casioWOne from '../../../assets/images/Rectangle_24.png'
+import React, {useEffect, useState} from 'react';
+
+import { getProductSold } from '../../../services/productService';
+
+import ListProduct from "../../../components/ListProductCard";
+import EmptyState from '../../../components/EmptyState';
 
 const Sold = () => {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        getProductSold().then((response) => setProducts(response.data.data));
+    }, []);
+
+    useEffect(() => {
+        console.log(products);
+    }, [products]);
+
     return (
         <>
-            <div class="col-6 col-md-4">
-                <div class="card catalog-card">
-                        <img src={casioWOne} class="card-img-top" alt="jam-tangan" />
-                        <div class="card-body">
-                        <div class="card-body pt-2">
-                            <h5 className='catalog-title'>Jam Tangan Casio</h5>
-                            <p class="card-text text-muted">Aksesoris</p>
-                            <h5>Rp. 250.000</h5>
-                        </div>
-                    </div>
-                </div>
-            </div> 
+            {
+                products.length === 0 ?(
+                    <EmptyState 
+                    description={"Belum ada produk yang terjual nih, sabar ya!"}
+                    />
+                ) : (
+                    <ListProduct data={products} />
+                )
+
+            } 
         </>
     );
 }

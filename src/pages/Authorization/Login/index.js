@@ -15,8 +15,8 @@ const Index = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [status, setStatus] = useState("");
-    const [message, setMessage] = useState([]);
+    // const [status, setStatus] = useState('');
+    // const [message, setMessage] = useState([]);
     const [type, setType] = useState("password");
     const [eyeIcon, setEyeIcon] = useState("bi-eye");
     const navigate = useNavigate();
