@@ -8,7 +8,7 @@ const InputForm = () => {
                 <div class="container">
                     <div class="row d-flex flex-wrap align-content-center justify-content-center">
                         <div class="col-1 col-lg-1 mt-4">
-                            <a href="/store#catalog"><img src={backBtn} alt="back-button" /></a>
+                            <a href="/seller/store#catalog"><img src={backBtn} alt="back-button" /></a>
                         </div>
                         
                         <div class="col-11 mt-4">
