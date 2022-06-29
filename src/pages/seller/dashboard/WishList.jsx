@@ -1,104 +1,34 @@
-import React from 'react';
-import casioWOne from '../../../assets/images/Rectangle_24.png'
+import React, {useEffect, useState} from 'react';
+
+import { getOfferProduct } from '../../../services/productService';
+
+import ListProduct from "../../../components/ListProductCard";
+import EmptyState from '../../../components/EmptyState';
 
 const WishList = () => {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        getOfferProduct().then((response) => setProducts(response.data.data));
+    }, []);
+
+    useEffect(() => {
+        console.log(products);
+    }, [products]);
+
+
     return (
         <>
-            <a href="/seller/offer-product">
-            <div class="col-6 col-md-4">
-                    <div class="card catalog-card">
+            {
+                products.length === 0 ?(
+                    <EmptyState 
+                    description={"Belum ada produk yang diminati nih, sabar ya!"}
+                    />
+                ) : (
+                    <ListProduct data={products} />
+                )
 
-                        <img src={casioWOne} class="card-img-top" alt="jam-tangan" />
-                        <div class="card-body">
-                            <div class="card-body pt-2">
-                                <h5 className='catalog-title'>Jam Tangan Casio</h5>
-                                <p class="card-text text-muted">Aksesoris</p>
-                                <h5>Rp. 250.000</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            
-            <a href="/seller/offer-product">
-            <div class="col-6 col-md-4">
-                    <div class="card catalog-card">
-
-                        <img src={casioWOne} class="card-img-top" alt="jam-tangan" />
-                        <div class="card-body">
-                            <div class="card-body pt-2">
-                                <h5 className='catalog-title'>Jam Tangan Casio</h5>
-                                <p class="card-text text-muted">Aksesoris</p>
-                                <h5>Rp. 250.000</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <a href="/seller/offer-product">
-            <div class="col-6 col-md-4">
-                    <div class="card catalog-card">
-
-                        <img src={casioWOne} class="card-img-top" alt="jam-tangan" />
-                        <div class="card-body">
-                            <div class="card-body pt-2">
-                                <h5 className='catalog-title'>Jam Tangan Casio</h5>
-                                <p class="card-text text-muted">Aksesoris</p>
-                                <h5>Rp. 250.000</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <a href="/seller/offer-product">
-            <div class="col-6 col-md-4">
-                    <div class="card catalog-card">
-
-                        <img src={casioWOne} class="card-img-top" alt="jam-tangan" />
-                        <div class="card-body">
-                            <div class="card-body pt-2">
-                                <h5 className='catalog-title'>Jam Tangan Casio</h5>
-                                <p class="card-text text-muted">Aksesoris</p>
-                                <h5>Rp. 250.000</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <a href="/seller/offer-product">
-            <div class="col-6 col-md-4">
-                    <div class="card catalog-card">
-
-                        <img src={casioWOne} class="card-img-top" alt="jam-tangan" />
-                        <div class="card-body">
-                            <div class="card-body pt-2">
-                                <h5 className='catalog-title'>Jam Tangan Casio</h5>
-                                <p class="card-text text-muted">Aksesoris</p>
-                                <h5>Rp. 250.000</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <a href="/seller/offer-product">
-            <div class="col-6 col-md-4">
-                    <div class="card catalog-card">
-
-                        <img src={casioWOne} class="card-img-top" alt="jam-tangan" />
-                        <div class="card-body">
-                            <div class="card-body pt-2">
-                                <h5 className='catalog-title'>Jam Tangan Casio</h5>
-                                <p class="card-text text-muted">Aksesoris</p>
-                                <h5>Rp. 250.000</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
+            }
         </>
     );
 }
