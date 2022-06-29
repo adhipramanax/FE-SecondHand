@@ -3,6 +3,16 @@ import axios from "axios";
 const baseURL = "https://be-final-project-group-4-fsw-2.herokuapp.com/api/v1";
 const token = localStorage.getItem("token");
 
+// Buyer Service
+export async function getAllProduct() {
+    try {
+        return await axios.get(`${baseURL}/product`);
+    } catch (error) {
+        return error.response;
+    }
+}
+
+// Seller Service
 export async function getProductSold() {
     try {
         return await axios.get(`${baseURL}/seller/product/sold`, {

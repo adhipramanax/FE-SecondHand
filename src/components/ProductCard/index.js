@@ -1,15 +1,14 @@
 import React from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const H5 = styled.h5`
     font-size: 1.2rem;
-`
+`;
 
 const P = styled.p`
-    font-size: .75rem;
+    font-size: 0.75rem;
     color: #8c8c8c;
-`
-
+`;
 
 const Index = ({ optionCol, urlImage, title, category, price, urlLink }) => {
     return (
