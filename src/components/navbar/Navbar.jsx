@@ -42,7 +42,7 @@ const Index = () => {
 
                                     <Notif />
 
-                                    <IconButton to={"/login"} icon={"bi bi-person"} />
+                                    <IconButton to={"/my-account"} icon={"bi bi-person"} />
 
                                     <LinkButton color={"#ffffff"} bg={"#4B1979"} icon={fiLogin} text={"Toko"} onClick={() => handleOnClick("/seller/store#catalog", "seller")} />
                                 </>
@@ -79,7 +79,7 @@ const Index = () => {
 
                             <Notif />
 
-                            <TextLink to={"/"} text={"Akun Saya"} />
+                            <TextLink to={"/my-account"} text={"Akun Saya"} />
 
                             <LinkButton color={"#ffffff"} bg={"#4B1979"} icon={fiLogin} text={"Toko"} onClick={() => handleOnClick("/seller/store#catalog", "seller")} />
                         </>

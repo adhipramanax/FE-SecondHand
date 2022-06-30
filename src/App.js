@@ -21,7 +21,7 @@ function App() {
                 <Route path="/product/:id" element={<DetailProduct />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/my-account" element={<MyAccount/>} />
+                <Route path="/my-account" element={<MyAccount />} />
 
                 <Route path="/seller/store" element={<Dashboard />} />
                 <Route path="/seller/create-product" element={<CreateProduct />} />

@@ -44,13 +44,13 @@ const Index = ({ data, children }) => {
         <>
             <div class="row">
                 <div class="col-12 col-lg-8 mt-4">
-                    <Carousel />
+                    <Carousel data={data.galleries} />
                 </div>
                 <div class="col-12 col-lg-4 mt-4">
                     <div class="card card-detail">
                         <div class="card-body">
                             <Text class="card-title">{data.name}</Text>
-                            <TextMuted class="card-text text-muted"></TextMuted>
+                            <TextMuted class="card-text text-muted">{data?.categories?.map((category) => category.name).join(", ")}</TextMuted>
                             <Text class="card-title">Rp. {data.price}</Text>
 
                             {role === "buyer" ? (
@@ -80,10 +80,10 @@ const Index = ({ data, children }) => {
                                 <div class="col-10 col-lg-9 col-md-10 d-flex flex-column justify-content-center">
                                     <Wrapper>
                                         <a href="" class="text-dark">
-                                            <ProfileText class="mb-0">Bagus</ProfileText>
+                                            <ProfileText class="mb-0">{data?.seller?.name}</ProfileText>
                                         </a>
                                     </Wrapper>
-                                    <ProfileTextMuted class="card-text text-muted mb-0">Bandung</ProfileTextMuted>
+                                    <ProfileTextMuted class="card-text text-muted mb-0">{data?.seller?.city}</ProfileTextMuted>
                                 </div>
                             </div>
                         </div>

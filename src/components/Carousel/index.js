@@ -6,20 +6,18 @@ const Index = ({ data }) => {
         <>
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    {data?.map((item, index) => {
+                        return <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to={index} class={index === 0 ? "active" : ""}></button>;
+                    })}
                 </div>
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src={casio} class="d-block w-100" alt="item-img" />
-                    </div>
-                    <div class="carousel-item">
-                        <img src={casio} class="d-block w-100" alt="item-img" />
-                    </div>
-                    <div class="carousel-item">
-                        <img src={casio} class="d-block w-100" alt="item-img" />
-                    </div>
+                    {data?.map((item, index) => {
+                        return (
+                            <div class={`carousel-item ${index === 0 ? "active" : ""}`}>
+                                <img src={item.url_photo} class="d-block w-100" alt="item-img" />
+                            </div>
+                        );
+                    })}
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
