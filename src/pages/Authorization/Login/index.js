@@ -8,11 +8,7 @@ import imgLogin from "../../../assets/images/login.png";
 import "../../../assets/css/register.style.css";
 import { loginService } from "../../../services/authService";
 
-import { authContext } from "../../../provider/authProvider";
-
 const Index = () => {
-    const statusLogin = React.useContext(authContext);
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     // const [status, setStatus] = useState('');
@@ -53,14 +49,14 @@ const Index = () => {
 
         loginService(data).then((response) => {
             localStorage.setItem("token", response.data.token);
-            statusLogin.setIsLogin(true);
+            localStorage.setItem("isLogin", true);
+            localStorage.setItem("role", "buyer");
             navigate("/");
         });
     };
 
     return (
         <>
-            {console.log(statusLogin.isLogin)}
             <div className="container-fluid position-relative">
                 <div className="row ">
                     <div className="col-6 p-0 img-block">

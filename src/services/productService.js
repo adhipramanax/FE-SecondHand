@@ -3,6 +3,8 @@ import axios from "axios";
 const baseURL = "https://be-final-project-group-4-fsw-2.herokuapp.com/api/v1";
 const token = localStorage.getItem("token");
 
+console.log(token);
+
 // Buyer Service
 export async function getAllProduct() {
     try {
@@ -15,6 +17,18 @@ export async function getAllProduct() {
 export async function findProduct(id) {
     try {
         return await axios.get(`${baseURL}/product/${id}`);
+    } catch (error) {
+        return error.response;
+    }
+}
+
+export async function offerProduct(data) {
+    try {
+        return await axios.post(`${baseURL}/offer`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
     } catch (error) {
         return error.response;
     }

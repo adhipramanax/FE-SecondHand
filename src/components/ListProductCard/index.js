@@ -2,6 +2,8 @@ import React from "react";
 import ProductCard from "../ProductCard";
 
 const Index = ({ data, action = false }) => {
+    const role = localStorage.getItem("role");
+
     return (
         <>
             <div class="row mt-4 g-4">
@@ -13,12 +15,20 @@ const Index = ({ data, action = false }) => {
                         </a>
                     </div>
                 ) : (
-                    data.map((item, index) => {
-                        return (
-                            <ProductCard urlImage={item.galleries[0].urlImage} title={item.name} category={item.categories.map((category) => category.name + ", ")} price={item.price} urlLink={""} />
-                        );
-                    })
+                    <></>
                 )}
+
+                {data.map((item, index) => {
+                    return (
+                        <ProductCard
+                            urlImage={item.galleries[0].urlImage}
+                            title={item.name}
+                            category={item.categories.map((category) => category.name + ", ")}
+                            price={item.price}
+                            urlLink={role === "buyer" ? "/product/" + item.id : "/seller/product/" + item.id}
+                        />
+                    );
+                })}
             </div>
         </>
     );
