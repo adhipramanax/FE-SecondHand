@@ -1,5 +1,7 @@
 .notifWrapper{
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .notif{
