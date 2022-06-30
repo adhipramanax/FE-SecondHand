@@ -8,11 +8,14 @@ import DetailProduct from "./pages/seller/DetailProduct";
 import OfferProduct from "./pages/seller/OfferProduct";
 import MyAccount from "./pages/Buyyer/MyAccount";
 // import StoreSellerViewbyBuyer from "./pages/Buyyer/StoreSellerView";
-// import DetailProductbyBuyer from "./pages/Buyyer/detail product by buyer";
+// import DetailProductbyBuyer from "./pages/Buyyer/detail product by buyer"
+
+import { AuthProvider } from "./provider/authProvider";
 
 function App() {
   return (
-    <Routes>
+    <AuthProvider>
+      <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
@@ -22,7 +25,8 @@ function App() {
         <Route path="/seller/create-product" element={<CreateProduct />} />
         <Route path="/seller/detail-product" element={<DetailProduct />} />
         <Route path="/seller/offer-product" element={<OfferProduct />} />
-    </Routes>
+      </Routes>
+    </AuthProvider>
   );
 }
 

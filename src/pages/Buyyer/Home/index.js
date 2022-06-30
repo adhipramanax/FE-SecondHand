@@ -1,9 +1,9 @@
-import React from 'react';
-import MainLayout from '../../../layouts/Main.layout';
-import Carousel from './Carousel';
-import Category from './Category';
-import Catalog from './Catalog';
-import '../../../assets/css/home.style.css'
+import React from "react";
+import MainLayout from "../../../layouts/Main.layout";
+import Carousel from "./Carousel";
+import Category from "./Category";
+import Catalog from "./Catalog";
+import "../../../assets/css/home.style.css";
 
 const Index = () => {
     return (
@@ -12,7 +12,6 @@ const Index = () => {
                 <div className="page-home">
                     <Carousel />
                     <Category />
-                    <Catalog />
                     <Catalog />
                     <div class="container">
                         <div class="row">
@@ -25,6 +24,6 @@ const Index = () => {
             </MainLayout>
         </>
     );
-}
+};
 
 export default Index;
