@@ -7,6 +7,7 @@ import CreateProduct from "./pages/seller/CreateProduct";
 // import DetailProduct from "./pages/seller/DetailProduct";
 import OfferProduct from "./pages/seller/OfferProduct";
 import DetailProduct from "./pages/Buyyer/DetailProduct";
+import MyAccount from "./pages/Buyyer/MyAccount";
 // import StoreSellerViewbyBuyer from "./pages/Buyyer/StoreSellerView";
 // import DetailProductbyBuyer from "./pages/Buyyer/detail product by buyer"
 
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/product/:id" element={<DetailProduct />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/my-account" element={<MyAccount/>} />
 
                 <Route path="/seller/store" element={<Dashboard />} />
                 <Route path="/seller/create-product" element={<CreateProduct />} />
