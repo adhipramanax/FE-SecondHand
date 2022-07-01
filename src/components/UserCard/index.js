@@ -22,10 +22,10 @@ const ProfileTextMuted = styled.p`
     margin-left: 10px;
 `;
 
-const Index = ({ data }) => {
+const Index = ({ data, optionCol }) => {
     return (
         <>
-            <div class="col-12">
+            <div class={`col-12 ${optionCol}`}>
                 <div class="card mt-4 card-detail">
                     <div class="card-body">
                         <div class="row">
