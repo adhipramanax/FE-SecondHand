@@ -3,9 +3,7 @@ import styled from "styled-components";
 
 // Component
 import Carousel from "../Carousel";
-
-// Image
-import profile from "../../assets/images/Rectangle_33.png";
+import UserCard from "../UserCard";
 
 const Text = styled.h5`
     font-size: 1.2rem;
@@ -71,23 +69,7 @@ const Index = ({ data, children }) => {
                             {/* <!-- Button trigger modal --> */}
                         </div>
                     </div>
-                    <div class="card mt-4 card-detail">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-2 col-lg-2 col-md-1">
-                                    <img src={profile} alt="profile" />
-                                </div>
-                                <div class="col-10 col-lg-9 col-md-10 d-flex flex-column justify-content-center">
-                                    <Wrapper>
-                                        <a href="" class="text-dark">
-                                            <ProfileText class="mb-0">{data?.seller?.name}</ProfileText>
-                                        </a>
-                                    </Wrapper>
-                                    <ProfileTextMuted class="card-text text-muted mb-0">{data?.seller?.city}</ProfileTextMuted>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <UserCard data={data.seller} />
                 </div>
                 <div class="col-12 col-lg-8 mt-4 mb-5">
                     <div class="card card-detail">
