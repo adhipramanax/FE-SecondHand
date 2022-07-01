@@ -1,7 +1,7 @@
 import React from "react";
 import ProductCard from "../ProductCard";
 
-const Index = ({ data, action = false }) => {
+const Index = ({ data, link, action = false }) => {
     const role = localStorage.getItem("role");
 
     return (
@@ -25,7 +25,7 @@ const Index = ({ data, action = false }) => {
                             title={item.name}
                             category={item.categories.map((category) => category.name + ", ")}
                             price={item.price}
-                            urlLink={role === "buyer" ? "/product/" + item.id : "/seller/product/" + item.id}
+                            urlLink={role === "buyer" ? `${link}${item.id}` : `${link}${item.id}`}
                         />
                     );
                 })}
