@@ -5,7 +5,7 @@ const token = localStorage.getItem("token");
 
 console.log(token);
 
-// Buyer Service 
+// Buyer Service
 export async function getAllProduct() {
     try {
         return await axios.get(`${baseURL}/product`);
@@ -33,19 +33,6 @@ export async function offerProduct(data) {
         return error.response;
     }
 }
-export async function getWishlistProduct(data) {
-    try {
-        return await axios.get(`${baseURL}/offer/history/:id`, data, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-    } catch (error) {
-        return error.response;
-    }
-}
-
-
 
 // Seller Service
 export async function getProductSold() {
