@@ -1,5 +1,5 @@
-import React from 'react';
-import profile from '../../../assets/images/Rectangle_33.png';
+import React from "react";
+import profile from "../../../assets/images/Rectangle_33.png";
 
 const CardSeller = () => {
     return (
@@ -22,18 +22,19 @@ const CardSeller = () => {
                                         </div>
 
                                         <div class="col-3 col-lg-2 text-end">
-                                            <a href="" class="btn btn-color-white px-2">Logout</a>
+                                            <a href="" class="btn btn-color-white px-2">
+                                                Logout
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </section>
         </>
     );
-}
+};
 
 export default CardSeller;

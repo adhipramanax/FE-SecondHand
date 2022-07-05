@@ -1,23 +1,27 @@
-import React from 'react';
-import CardCatalog from '../../../components/card/CardCatalog';
+import React, { useEffect, useState } from "react";
+import { getAllProduct } from "../../../services/productService";
+import ListProduct from "../../../components/ListProductCard";
 
 const Catalog = () => {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        getAllProduct().then((response) => setProducts(response.data.data));
+    }, []);
+
+    // useEffect(() => {
+    //     // console.log(products);
+    // }, [products]);
+
     return (
         <>
             <section className="catalog">
                 <div class="container mt-4 mb-5">
-                    <div className="row g-4">
-                        <CardCatalog />
-                        <CardCatalog />
-                        <CardCatalog />
-                        <CardCatalog />
-                        <CardCatalog />
-                        <CardCatalog />
-                    </div>
+                    <ListProduct data={products} link="/product/" />
                 </div>
             </section>
         </>
     );
-}
+};
 
 export default Catalog;

@@ -1,10 +1,5 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import fiUser from "../../../assets/images/fi_user.png";
-import fiBox from "../../../assets/images/fi_box.png";
-import vector from "../../../assets/images/Vector.png";
-import fiDollar from "../../../assets/images/fi_dollar-sign.png";
-import fiLeft from "../../../assets/images/fi_chevron-right.png";
 import MainLayout from "../../../layouts/Main.layout";
 
 // owl carousel
@@ -12,15 +7,14 @@ import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import CardSeller from "./CardSeller";
-import Catalog from "./Catalog";
 import Profile from "./Profile";
 import WishList from "./WishList";
-import Sold from "./Sold";
+import HistoryTransaction from "./HistoryTransaction";
 
-const filter_btn = {
-    display: "inline-block",
-    width: "25px",
-};
+// const filter_btn = {
+//     display: "inline-block",
+//     width: "25px",
+// };
 
 const Index = () => {
     let { hash } = useLocation();
@@ -30,72 +24,50 @@ const Index = () => {
             <MainLayout>
                 <section className="store-content">
                     <CardSeller />
+                    {/* navigation */}
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
                                 <p class="fw-bold mt-4 d-block d-md-none">Kategori</p>
-                                {/* Desktop View */}
+                                {/* Mobile View */}
                                 <OwlCarousel className="owl-theme d-block d-md-none" margin={0} nav={false} dots={false} items={8} autoWidth={true} merge={true}>
                                     <a href="#profile" class="item btn filter-btn">
-                                        <img src={fiUser} class="pe-2 filter-btn__icon" style={filter_btn} alt="fi-search" />
-                                        Profile
+                                        <i class="bi bi-person fs-4 text-black">Profile</i>
                                     </a>
-                                    <a href="#catalog" class="item btn filter-btn active">
-                                        <img src={fiBox} class="pe-2 filter-btn__icon" style={filter_btn} alt="fi-search" />
-                                        Semua Produk
+                                    <a href="#wishlist" class="item btn filter-btn active ">
+                                        <i class="bi bi-heart fs-4 text-light">Diminati</i>
                                     </a>
-                                    <a href="#wishlist" class="item btn filter-btn">
-                                        <img src={vector} class="pe-2 filter-btn__icon" style={filter_btn} alt="fi-search" />
-                                        Diminati
-                                    </a>
-                                    <a href="#sold" class="item btn filter-btn">
-                                        <img src={fiDollar} class="pe-2 filter-btn__icon" style={filter_btn} alt="fi-search" />
-                                        Terjual
+                                    <a href="#HistoryTransaction" class="item btn filter-btn">
+                                        <i class="bi bi-arrow-counterclockwise fs-4 text-black">Histori Transaksi</i>
                                     </a>
                                 </OwlCarousel>
                             </div>
                         </div>
                     </div>
+                    {/* End Navigation */}
 
+                    {/* Menu Category */}
                     <div class="container mt-4 mb-5">
                         <div className="row g-4 mt-4">
                             <div class="col-md-3">
                                 <div class="card card-detail d-none d-md-block">
                                     <div class="card-body">
                                         <p class="fw-bold">Kategori</p>
-                                        <div class="">
-                                            <div class="row">
-                                                {/* profile */}
-                                                <div class="col-12">
-                                                    <a href="#profile" class="d-flex text-decoration-none justify-content-between align-items-center">
-                                                        <div class="d-flex justify-content-between align-items-center gap-2">
-                                                            <i class="bi bi-person fs-4 text-black"></i>
-                                                            <p href="#profile" class="text-decoration-none text-dark m-0">
-                                                                Profile
-                                                            </p>
-                                                        </div>
-                                                        <i class="bi bi-chevron-right text-dark"></i>
-                                                    </a>
-                                                    <hr class="w-100 text-black mt-0" />
-                                                </div>
-                                            </div>
-                                            {/* End of profile */}
-
-                                            {/* catalog */}
+                                        <div class="row">
+                                            {/* Profile */}
                                             <div class="col-12">
-                                                <a href="#catalog" class="d-flex text-decoration-none justify-content-between align-items-center">
+                                                <a href="#profile" class="d-flex text-decoration-none justify-content-between align-items-center">
                                                     <div class="d-flex justify-content-between align-items-center gap-2">
-                                                        <i class="bi bi-box fs-4 text-dark"></i>
+                                                        <i class="bi bi-person fs-4 text-black"></i>
                                                         <p href="#profile" class="text-decoration-none text-dark m-0">
-                                                            Semua Produk
+                                                            Profile
                                                         </p>
                                                     </div>
                                                     <i class="bi bi-chevron-right text-dark"></i>
                                                 </a>
                                                 <hr class="w-100 text-black mt-0" />
                                             </div>
-                                            {/* End of catalog */}
-
+                                            {/* End Profile */}
                                             {/* Wishlist */}
                                             <div class="col-12">
                                                 <a href="#wishlist" class="d-flex text-decoration-none justify-content-between align-items-center">
@@ -110,32 +82,29 @@ const Index = () => {
                                                 <hr class="w-100 text-black mt-0" />
                                             </div>
                                             {/* End Wishlist */}
-
-                                            {/* Sold */}
-                                            <div class="col-12 mb-5">
-                                                <a href="#sold" class="d-flex text-decoration-none justify-content-between align-items-center">
+                                            {/* History Transactio */}
+                                            <div class="col-12">
+                                                <a href="#HistoryTransaction" class="d-flex text-decoration-none justify-content-between align-items-center">
                                                     <div class="d-flex justify-content-between align-items-center gap-2">
-                                                        <i class="bi bi-currency-dollar fs-4 text-dark"></i>
+                                                        <i class="bi bi-arrow-counterclockwise fs-4 text-black"></i>
                                                         <p href="#profile" class="text-decoration-none text-dark m-0">
-                                                            Terjual
+                                                            Riwayat Transaksi
                                                         </p>
                                                     </div>
                                                     <i class="bi bi-chevron-right text-dark"></i>
                                                 </a>
                                                 <hr class="w-100 text-black mt-0" />
                                             </div>
-                                            {/* End Sold */}
+                                            {/* End History Transactio */}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-12 col-md-9">
                                 <div class="row g-4">
-                                    {hash === "#catalog" ? <Catalog /> : <></>}
                                     {hash === "#profile" ? <Profile /> : <></>}
                                     {hash === "#wishlist" ? <WishList /> : <></>}
-                                    {hash === "#sold" ? <Sold /> : <></>}
+                                    {hash === "#HistoryTransaction" ? <HistoryTransaction /> : <></>}
                                 </div>
                             </div>
                         </div>
