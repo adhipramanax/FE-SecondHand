@@ -34,7 +34,7 @@ const Index = ({ data, optionCol }) => {
                             </div>
                             <div class="col-10 col-lg-9 col-md-10 d-flex flex-column justify-content-center">
                                 <Wrapper>
-                                    <a href="/buyer/store" class="text-dark">
+                                    <a href="/seller/offer-product" class="text-dark">
                                         <ProfileText class="mb-0">{data?.name}</ProfileText>
                                     </a>
                                 </Wrapper>

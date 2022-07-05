@@ -1,0 +1,21 @@
+.file_upload_wrapper{
+    width: 100%;
+    text-align: center;    
+}
+
+.file_label{
+    width: 125px;
+    height: 125px;
+    margin-bottom: 20px;
+    border: 1px dashed #000000;
+}
+
+.image_preview{
+    width: 125px;
+    height: 125px;
+    object-fit: fill;
+}
+
+.file_upload{
+    display: none;
+}

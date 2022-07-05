@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Input from "../../../components/Input";
 import Button from "../../../components/ActionButton";
+import styles from "../../../assets/css/image-preview.module.css";
 
 const Profile = () => {
     const [name, setName] = useState("");
@@ -80,16 +81,12 @@ const Profile = () => {
     return (
         <>
             <div class="col-12">
-                {/* <Input label="Foto" type="file" name="photo" id="photo" width="100%" placeholder="Foto" /> */}
-
-                {!fileIsValid ? "File is Not Valid" : ""}
-                {fileUrl !== "" ? <img src={fileUrl} alt="uploaded_images" /> : "tidak ada image!"}
-                <form>
-                    <input accept="image/*" label="Foto" type="file" name="upload_gambar" id="upload_gambar" width="50%" onChange={(event) => handleOnChangeFile(event)} />
-                    <button disabled={!fileIsValid} onClick={(e) => handleSubmit(e)}>
-                        Submit Upload
-                    </button>
-                </form>
+                <div class={styles.file_upload_wrapper}>
+                    <label class={styles.file_label}>
+                        {fileUrl !== "" ? <img src={fileUrl} class={styles.image_preview} alt="uploaded_images" /> : ""}
+                        <input type="file" class={styles.file_upload} accept="image/*" name="image" onChange={(event) => handleOnChangeFile(event)} />
+                    </label>
+                </div>
 
                 <Input label="Nama*" type="text" name="name" id="name" width="100%" placeholder="Nama" value={name} onChange={(value) => handleName(value)} />
 
