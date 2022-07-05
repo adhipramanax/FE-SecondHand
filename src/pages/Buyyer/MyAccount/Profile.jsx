@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Input from "../../../components/Input";
 import Button from "../../../components/ActionButton";
 
@@ -7,6 +7,11 @@ const Profile = () => {
     const [city, setCity] = useState("");
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
+
+    // Use state photo
+    const [file, setFile] = useState("");
+    const [fileUrl, setFileUrl] = useState("");
+    const [fileIsValid, setFileIsValid] = useState(true);
 
     const handleName = (e) => {
         setName(e.target.value);
@@ -32,10 +37,59 @@ const Profile = () => {
         };
     };
 
+    // Handling on Change and validation file will upload
+    const handleOnChangeFile = (event) => {
+        if (event.target.files[0].name.match(/\.(jpg|png|jpeg|JPG|JPEG|PNG)$/)) {
+            setFile(event.target.files[0]);
+            setFileIsValid(true);
+        } else {
+            setFileUrl("");
+            setFileIsValid(false);
+        }
+    };
+
+    // Handling Preview File
+    useEffect(() => {
+        let fileData = false;
+        if (file !== "") {
+            fileData = new FileReader();
+            fileData.onload = (event) => {
+                if (event.target.result) {
+                    setFileUrl(event.target.result);
+                }
+            };
+            fileData.readAsDataURL(file);
+        }
+    }, [file]);
+
+    // Submit File to Backend
+    const handleSubmitPhoto = (e) => {
+        e.preventDefault();
+
+        let formData = new FormData();
+
+        formData.append("picture", file);
+
+        // axios.post("http://localhost:3000/users/new", formData).then((res) => {
+        //     console.log("Success Upload!")
+        // }).catch((err) => {
+        //     console.log(err.message)
+        // })
+    };
+
     return (
         <>
             <div class="col-12">
-                <Input label="Foto" type="file" name="photo" id="photo" width="100%" placeholder="Foto" />
+                {/* <Input label="Foto" type="file" name="photo" id="photo" width="100%" placeholder="Foto" /> */}
+
+                {!fileIsValid ? "File is Not Valid" : ""}
+                {fileUrl !== "" ? <img src={fileUrl} alt="uploaded_images" /> : "tidak ada image!"}
+                <form>
+                    <input accept="image/*" label="Foto" type="file" name="upload_gambar" id="upload_gambar" width="50%" onChange={(event) => handleOnChangeFile(event)} />
+                    <button disabled={!fileIsValid} onClick={(e) => handleSubmit(e)}>
+                        Submit Upload
+                    </button>
+                </form>
 
                 <Input label="Nama*" type="text" name="name" id="name" width="100%" placeholder="Nama" value={name} onChange={(value) => handleName(value)} />
 

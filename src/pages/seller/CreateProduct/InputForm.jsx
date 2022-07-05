@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import backBtn from "../../../assets/images/fi_arrow-left.png";
 import Input from "../../../components/Input";
-import ActionButton from "../../../components/ActionButton";
+import Button from "../../../components/ActionButton";
 
 const InputForm = () => {
     const [productName, setProductName] = useState("");
@@ -93,11 +93,11 @@ const InputForm = () => {
 
                             <div class="row mt-4 mb-4">
                                 <div class="col-6">
-                                    <ActionButton color="#000000" bg="#FFFFFF" text="Preview" width="100%" onClick={(e) => handlePreview(e)} />
+                                    <Button color="#000000" bg="#FFFFFF" text="Preview" width="100%" onClick={(e) => handlePreview(e)} />
                                 </div>
 
                                 <div class="col-6">
-                                    <ActionButton color="#FFFFFF" bg="#4B1979" text="Terbitkan" width="100%" onClick={(e) => handleSubmit(e)} />
+                                    <Button color="#FFFFFF" bg="#4B1979" text="Terbitkan" width="100%" onClick={(e) => handleSubmit(e)} />
                                 </div>
                             </div>
                         </div>
