@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import backBtn from "../../../assets/images/fi_arrow-left.png";
 import Input from "../../../components/Input";
 import Button from "../../../components/ActionButton";
+import Modal from "../../../components/Modal";
 
-const InputForm = () => {
+const InputForm = (data) => {
     const [productName, setProductName] = useState("");
     const [price, setPrice] = useState("");
     const [category, setCategory] = useState("");
@@ -93,11 +94,48 @@ const InputForm = () => {
 
                             <div class="row mt-4 mb-4">
                                 <div class="col-6">
-                                    <Button color="#000000" bg="#FFFFFF" text="Preview" width="100%" onClick={(e) => handlePreview(e)} />
+                                    <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-color-white w-100">
+                                        Preview
+                                        <Modal data={(productName, price, category, description, productPhoto)}>
+                                            <table>
+                                                <tr>
+                                                    <td>Nama Produk </td>
+                                                    <td>: </td>
+                                                    <td>{data.productName}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Harga </td>
+                                                    <td>: </td>
+                                                    <td>{data.price}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Kategori </td>
+                                                    <td>: </td>
+                                                    <td></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Deskripsi </td>
+                                                    <td>: </td>
+                                                    <td>{data.description}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Foto Produk </td>
+                                                    <td>: </td>
+                                                    <td></td>
+                                                </tr>
+                                            </table>
+                                        </Modal>
+                                    </button>
                                 </div>
 
                                 <div class="col-6">
-                                    <Button color="#FFFFFF" bg="#4B1979" text="Terbitkan" width="100%" onClick={(e) => handleSubmit(e)} />
+                                    <button class="btn btn-color-purple w-100" onClick={(e) => handleSubmit(e)}>
+                                        Terbitkan
+                                    </button>
                                 </div>
                             </div>
                         </div>
