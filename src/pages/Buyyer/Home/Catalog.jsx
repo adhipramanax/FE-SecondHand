@@ -17,7 +17,7 @@ const Catalog = () => {
         <>
             <section className="catalog">
                 <div class="container mt-4 mb-5">
-                    <ListProduct data={products} />
+                    <ListProduct data={products} link="/product/" />
                 </div>
             </section>
         </>

@@ -4,10 +4,11 @@ import Login from "./pages/Authorization/Login";
 import Register from "./pages/Authorization/Register";
 import Dashboard from "./pages/seller/dashboard";
 import CreateProduct from "./pages/seller/CreateProduct";
-// import DetailProduct from "./pages/seller/DetailProduct";
+import DetailProductSeller from "./pages/seller/DetailProduct";
 import OfferProduct from "./pages/seller/OfferProduct";
 import DetailProduct from "./pages/Buyyer/DetailProduct";
 import MyAccount from "./pages/Buyyer/MyAccount";
+import DetailOffer from "./pages/seller/DetailOffer";
 // import StoreSellerViewbyBuyer from "./pages/Buyyer/StoreSellerView";
 // import DetailProductbyBuyer from "./pages/Buyyer/detail product by buyer"
 
@@ -25,8 +26,9 @@ function App() {
 
                 <Route path="/seller/store" element={<Dashboard />} />
                 <Route path="/seller/create-product" element={<CreateProduct />} />
-                {/* <Route path="/seller/detail-product" element={<DetailProduct />} /> */}
+                <Route path="/seller/product/:id" element={<DetailProductSeller />} />
                 <Route path="/seller/offer-product" element={<OfferProduct />} />
+                <Route path="/seller/offer/:id" element={<DetailOffer />} />
             </Routes>
         </AuthProvider>
     );
