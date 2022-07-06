@@ -9,6 +9,7 @@ import OfferProduct from "./pages/seller/OfferProduct";
 import DetailProduct from "./pages/Buyyer/DetailProduct";
 import MyAccount from "./pages/Buyyer/MyAccount";
 import DetailOffer from "./pages/seller/DetailOffer";
+import StoreSeller from "./pages/Buyyer/StoreSeller";
 // import StoreSellerViewbyBuyer from "./pages/Buyyer/StoreSellerView";
 // import DetailProductbyBuyer from "./pages/Buyyer/detail product by buyer"
 
@@ -29,6 +30,8 @@ function App() {
                 <Route path="/seller/product/:id" element={<DetailProductSeller />} />
                 <Route path="/seller/offer-product" element={<OfferProduct />} />
                 <Route path="/seller/offer/:id" element={<DetailOffer />} />
+
+                <Route path="/buyer/store" element={<StoreSeller />} />
             </Routes>
         </AuthProvider>
     );
