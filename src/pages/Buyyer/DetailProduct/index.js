@@ -60,9 +60,6 @@ const Index = () => {
                                 </div>
                                 <Input label="Harga Tawar" type="price" name="price" id="price" placeholder="Rp. 0,00" onChange={(value) => handlePrice(value)} />
                                 <div class="mt-4">
-                                    {/* <button type="button" class="btn btn-color-purple w-100">
-                                        Kirim
-                                    </button> */}
                                     <ActionButton color="#FFFFFF" bg="#4B1979" width="100%" text="Kirim" onClick={(e) => handleSubmit(e)} />
                                 </div>
                             </Modal>

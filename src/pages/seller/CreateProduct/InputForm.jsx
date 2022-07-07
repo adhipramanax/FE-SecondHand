@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import backBtn from "../../../assets/images/fi_arrow-left.png";
 import Input from "../../../components/Input";
 import Button from "../../../components/ActionButton";
-import Modal from "../../../components/Modal";
+import Modal from "./Preview";
 
-const InputForm = (data) => {
+const InputForm = () => {
     const [productName, setProductName] = useState("");
     const [price, setPrice] = useState("");
     const [category, setCategory] = useState("");
@@ -30,8 +30,6 @@ const InputForm = (data) => {
     const handleProductPhoto = (e) => {
         setProductPhoto(e.target.value);
     };
-
-    const handlePreview = (e) => {};
 
     const handleSubmit = (e) => {
         const data = {
@@ -71,12 +69,12 @@ const InputForm = (data) => {
                             <Input label="Harga" type="number" name="product-price" id="product-price" width="100%" placeholder="Rp. 0,00" value={price} onChange={(value) => handlePrice(value)} />
 
                             <p class="mb-1">Kategori</p>
-                            <select class="input-style mb-3" name="category-product" id="category-product">
-                                <option value="1">Semua</option>
-                                <option value="2">Kendaraan</option>
-                                <option value="3">Baju</option>
-                                <option value="4">Elektronik</option>
-                                <option value="5">Kesehatan</option>
+                            <select class="input-style mb-3" name="category-product" id="category-product" onChange={(value) => handleCategory(value)}>
+                                <option value="Semua">Semua</option>
+                                <option value="Kendaraan">Kendaraan</option>
+                                <option value="Baju">Baju</option>
+                                <option value="Elektronik">Elektronik</option>
+                                <option value="Kesehatan">Kesehatan</option>
                             </select>
 
                             <Input
@@ -94,42 +92,10 @@ const InputForm = (data) => {
 
                             <div class="row mt-4 mb-4">
                                 <div class="col-6">
-                                    <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-color-white w-100">
+                                    <button data-bs-toggle="modal" data-bs-target="#modalPreview" class="btn btn-color-white w-100">
                                         Preview
-                                        <Modal data={(productName, price, category, description, productPhoto)}>
-                                            <table>
-                                                <tr>
-                                                    <td>Nama Produk </td>
-                                                    <td>: </td>
-                                                    <td>{data.productName}</td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>Harga </td>
-                                                    <td>: </td>
-                                                    <td>{data.price}</td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>Kategori </td>
-                                                    <td>: </td>
-                                                    <td></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>Deskripsi </td>
-                                                    <td>: </td>
-                                                    <td>{data.description}</td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>Foto Produk </td>
-                                                    <td>: </td>
-                                                    <td></td>
-                                                </tr>
-                                            </table>
-                                        </Modal>
                                     </button>
+                                    <Modal data={{ productName, price, category, description, productPhoto }} />
                                 </div>
 
                                 <div class="col-6">
