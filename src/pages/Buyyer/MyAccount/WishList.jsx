@@ -9,8 +9,6 @@ const WishList = () => {
         getWishListProduct().then((response) => setWishList(response.data.data));
     }, []);
 
-    console.log(wishList);
-
     return (
         <>
             <section className="wish-list">
