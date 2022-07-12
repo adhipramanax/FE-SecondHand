@@ -7,10 +7,15 @@ const Button = styled.button`
     padding: 12px 24px;
     background-color: transparent !important;
     color: ${props => props.color};
-    width: ${props => props.width}
+    width: ${props => props.width};
+
+    &:hover{
+        color: ${props => props.color};
+        border: 1px solid ${props => props.bg};
+    }
 `;
 
-const OutlineButton = ({ color, bg, text, width, icon, onClick }) => {
+const OutlineButton = ({ color, bg, text, width, icon, onClick, ...otherprops }) => {
     return (
         <>
             <Button type='button' 
@@ -19,6 +24,7 @@ const OutlineButton = ({ color, bg, text, width, icon, onClick }) => {
                     bg={bg}
                     width={width}
                     onClick={onClick}
+                    {...otherprops}
                     >
                     {icon ? <img src={icon} className="me-2" alt='Icon' /> : <></>}
                     { text }

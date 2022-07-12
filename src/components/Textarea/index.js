@@ -15,12 +15,12 @@ const TextArea = styled.textarea`
     }
 ` 
 
-const Index = ({label, name, id, onChange}) => {
+const Index = ({label, name, id, onChange, value}) => {
     return (
         <>
             <div class="mb-3">
                 <label for={id} class="form-label">{ label }</label>
-                <TextArea class="form-control" name={name} id={id} rows="3" onChange={onChange}></TextArea>
+                <TextArea class="form-control" name={name} id={id} rows="3" onChange={onChange}>{value}</TextArea>
             </div>
         </>
     );

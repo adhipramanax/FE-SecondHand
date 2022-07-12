@@ -15,7 +15,7 @@ const Catalog = () => {
 
     return (
         <>
-            <ListProduct data={products} action={true} />
+            <ListProduct data={products} action={true} link="/seller/product/" />
         </>
     );
 };

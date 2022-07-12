@@ -14,29 +14,8 @@ const TextMuted = styled.p`
     color: #8c8c8c;
 `;
 
-const Wrapper = styled.div`
-    a {
-        text-decoration: none;
-    }
-`;
-
-const ProfileText = styled.h5`
-    font-size: 1.1rem;
-    margin: 0;
-    margin-left: 10px;
-`;
-
-const ProfileTextMuted = styled.p`
-    font-size: 0.7rem;
-    color: #8c8c8c;
-    margin: 0;
-    margin-left: 10px;
-`;
-
 const Index = ({ data, children }) => {
     const role = localStorage.getItem("role");
-
-    console.log(data);
 
     return (
         <>
@@ -50,23 +29,8 @@ const Index = ({ data, children }) => {
                             <Text class="card-title">{data.name}</Text>
                             <TextMuted class="card-text text-muted">{data?.categories?.map((category) => category.name).join(", ")}</TextMuted>
                             <Text class="card-title">Rp. {data.price}</Text>
-
-                            {role === "buyer" ? (
-                                <button type="button" class="btn btn-color-purple w-100 mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                    Saya tertarik dan ingin nego
-                                </button>
-                            ) : (
-                                <>
-                                    <a href="#" class="btn btn-color-purple w-100 mt-3">
-                                        Terbitkan
-                                    </a>
-                                    <a href="#" class="btn btn-color-white w-100 mt-3">
-                                        Edit
-                                    </a>
-                                </>
-                            )}
-
-                            {/* <!-- Button trigger modal --> */}
+                            {children}
+                            
                         </div>
                     </div>
                     <UserCard data={data.seller} />
@@ -80,8 +44,6 @@ const Index = ({ data, children }) => {
                     </div>
                 </div>
             </div>
-
-            {children}
         </>
     );
 };

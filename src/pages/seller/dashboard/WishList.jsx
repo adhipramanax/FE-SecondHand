@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
 
-import { getOfferProduct } from '../../../services/productService';
+import { getOfferProduct } from "../../../services/productService";
 
 import ListProduct from "../../../components/ListProductCard";
-import EmptyState from '../../../components/EmptyState';
+import EmptyState from "../../../components/EmptyState";
 
 const WishList = () => {
     const [products, setProducts] = useState([]);
@@ -16,21 +16,7 @@ const WishList = () => {
         console.log(products);
     }, [products]);
 
-
-    return (
-        <>
-            {
-                products.length === 0 ?(
-                    <EmptyState 
-                    description={"Belum ada produk yang diminati nih, sabar ya!"}
-                    />
-                ) : (
-                    <ListProduct data={products} />
-                )
-
-            }
-        </>
-    );
+    return <>{products.length === 0 ? <EmptyState description={"Belum ada produk yang diminati nih, sabar ya!"} /> : <ListProduct data={products} link="/seller/offer/" />}</>;
 };
 
 export default WishList;

@@ -20,7 +20,7 @@ const Index = () => {
         <>
             <MainLayout>
                 <div class="container">
-                    <ListUserCard data={users} optionCol="col-md-4" />
+                    <ListUserCard data={users} optionCol="col-md-4" link={true}/>
                 </div>
             </MainLayout>
         </>

@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import casioWOne from "../../../assets/images/Rectangle_24.png";
 
 const Catalog = () => {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {}, []);
+
     return (
         <>
             <div class="col-6 col-md-4">

@@ -3,17 +3,14 @@ import axios from "axios";
 const baseURL = "https://be-final-project-group-4-fsw-2.herokuapp.com/api/v1";
 const token = localStorage.getItem("token");
 
-export async function getHistoryTransaction() {
+// Buyer Service
+export async function getAllCategory() {
     try {
-        return await axios.get(`${baseURL}/offer/history`, {
+        return await axios.get(`${baseURL}/categories`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
-<<<<<<< HEAD
         });
-=======
-        });   
->>>>>>> 73760ef4771a7b327180c671bfa52c3ae062d3bc
     } catch (error) {
         return error.response;
     }

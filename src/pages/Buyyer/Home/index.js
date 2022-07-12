@@ -5,9 +5,11 @@ import Category from "./Category";
 import Catalog from "./Catalog";
 import "../../../assets/css/home.style.css";
 
+import { ProductProvider } from '../../../provider/productProvider';
+
 const Index = () => {
     return (
-        <>
+        <ProductProvider>
             <MainLayout>
                 <div className="page-home">
                     <Carousel />
@@ -22,7 +24,7 @@ const Index = () => {
                     </div>
                 </div>
             </MainLayout>
-        </>
+        </ProductProvider>
     );
 };
 

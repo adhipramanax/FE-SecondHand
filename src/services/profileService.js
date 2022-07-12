@@ -3,10 +3,9 @@ import axios from "axios";
 const baseURL = "https://be-final-project-group-4-fsw-2.herokuapp.com/api/v1";
 const token = localStorage.getItem("token");
 
-// Buyer Service
-export async function getAllOfferProduct(id) {
+export async function getProfile() {
     try {
-        return await axios.get(`${baseURL}/offer/${id}`, {
+        return await axios.get(`${baseURL}/profile`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -16,13 +15,13 @@ export async function getAllOfferProduct(id) {
     }
 }
 
-export async function updateStatusOffer(data, id) {
-    
+export async function updateProfile(data, id) {
     try {
-        return await axios.put(`${baseURL}/offer/${id}`,data, {
+        return await axios.put(`${baseURL}/profile/${id}`, data, {
             headers: {
                 Authorization: `Bearer ${token}`,
-            },
+                'Content-Type': 'multipart/form-data'
+            }
         });
     } catch (error) {
         return error.response;
