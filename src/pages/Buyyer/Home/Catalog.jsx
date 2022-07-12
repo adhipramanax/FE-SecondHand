@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { getAllProduct } from "../../../services/productService";
 import ListProduct from "../../../components/ListProductCard";
+import { productContext } from '../../../provider/productProvider';
 
 const Catalog = () => {
-    const [products, setProducts] = useState([]);
+    const productsValue = React.useContext(productContext);
 
     useEffect(() => {
-        getAllProduct().then((response) => setProducts(response.data.data));
+        getAllProduct().then((response) => productsValue.setProducts(response.data.data));
     }, []);
 
-    // useEffect(() => {
-    //     // console.log(products);
-    // }, [products]);
+    // const handleSearch = (e) => {
+    //     searchProduct(e.target.value).then((response) => setProducts(response.data.data));
+    // }
 
     return (
         <>
             <section className="catalog">
                 <div class="container mt-4 mb-5">
-                    <ListProduct data={products} />
+                    <ListProduct data={productsValue.products} />
                 </div>
             </section>
         </>

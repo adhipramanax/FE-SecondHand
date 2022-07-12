@@ -22,6 +22,14 @@ export async function findProduct(id) {
     }
 }
 
+export async function searchProduct(name) {
+    try {
+        return await axios.get(`${baseURL}/product/search?name=${name}`);
+    } catch (error) {
+        return error.response;
+    }
+}
+
 export async function offerProduct(data) {
     try {
         return await axios.post(`${baseURL}/offer`, data, {
