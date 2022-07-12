@@ -16,25 +16,25 @@ import StoreSeller from "./pages/Buyyer/StoreSeller";
 import { AuthProvider } from "./provider/authProvider";
 
 function App() {
-    return (
-        <AuthProvider>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/product/:id" element={<DetailProduct />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/my-account" element={<MyAccount />} />
+  return (
+    <AuthProvider>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/product/:id" element={<DetailProduct />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/my-account" element={<MyAccount />} />
 
-                <Route path="/seller/store" element={<Dashboard />} />
-                <Route path="/seller/create-product" element={<CreateProduct />} />
-                <Route path="/seller/product/:id" element={<DetailProductSeller />} />
-                <Route path="/seller/offer-product" element={<OfferProduct />} />
-                <Route path="/seller/offer/:id" element={<DetailOffer />} />
+        <Route path="/seller/store" element={<Dashboard />} />
+        <Route path="/seller/create-product" element={<CreateProduct />} />
+        <Route path="/seller/product/:id" element={<DetailProductSeller />} />
+        <Route path="/seller/offer/:id" element={<DetailOffer />} />
+        <Route path="/seller/offer/product/:id" element={<OfferProduct />} />
 
-                <Route path="/buyer/store" element={<StoreSeller />} />
-            </Routes>
-        </AuthProvider>
-    );
+        <Route path="/buyer/store" element={<StoreSeller />} />
+      </Routes>
+    </AuthProvider>
+  );
 }
 
 export default App;

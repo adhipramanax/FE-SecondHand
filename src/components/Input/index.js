@@ -2,7 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-    position: relative;
+    margin-bottom: 30px;
+
+    .error{
+        font-size: 12px;
+        color: #FF5A5A;
+        margin-top: 5px;
+    }
+
+    .input-group{
+        position: relative;
+    }
 `
 
 const Input = styled.input`
@@ -11,7 +21,6 @@ const Input = styled.input`
     display: block;
     width: 100%;
     padding: 12px 30px 12px 10px;
-    margin-bottom: 15px;
     
     &:focus {
         outline: none;
@@ -23,17 +32,20 @@ const Input = styled.input`
 const Icon = styled.i`
     position: absolute;
     right: 10px;
-    bottom: 13px;
+    bottom: 12px;
     margin-top: 5px;
 `
 
-const Index = ({label, type, name, id, value, placeholder, icon, onChange, onClick}) => {
+const Index = ({label, type, name, id, value, placeholder, erorr, icon, onChange, onClick}) => {
     return (
         <>
-            <Wrapper class="mb-3">
+            <Wrapper>
                 <label for={id} class="form-label">{ label }</label>
-                <Input type={type} class="form-control" name={name} id={id} value={value} placeholder={placeholder} onChange={onChange} />
-                <Icon className={icon} onClick={onClick}></Icon>
+                <div class="input-group">
+                    <Input type={type} class="form-control" name={name} id={id} value={value} placeholder={placeholder} onChange={onChange} />
+                    <Icon className={icon} onClick={onClick}></Icon>
+                </div>
+                <p class="error">{erorr}</p>
             </Wrapper>
         </>
     );

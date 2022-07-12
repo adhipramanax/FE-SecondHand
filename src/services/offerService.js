@@ -5,9 +5,21 @@ const token = localStorage.getItem("token");
 
 // Buyer Service
 export async function getAllOfferProduct(id) {
-    console.log(id);
     try {
         return await axios.get(`${baseURL}/offer/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    } catch (error) {
+        return error.response;
+    }
+}
+
+export async function updateStatusOffer(data, id) {
+    
+    try {
+        return await axios.put(`${baseURL}/offer/${id}`,data, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

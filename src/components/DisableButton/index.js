@@ -17,6 +17,7 @@ const DisableButton = ({text, width, icon, onClick }) => {
                     className='btn btn-primary'
                     width={width}
                     onClick={onClick}
+                    disabled={true}
                     >
                     {icon ? <img src={icon} className="me-2" alt='Icon' /> : <></>}
                     { text }

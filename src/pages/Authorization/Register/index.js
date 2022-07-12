@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
 import imgLogin from '../../../assets/images/login.png';
 import { Link, useNavigate } from "react-router-dom";
-import '../../../assets/css/register.style.css';
+
+// Componenet
 import Input from '../../../components/Input';
 import Button from '../../../components/ActionButton';
+
+// Service
 import { registerService } from '../../../services/authService';
 
+// CSS
+import '../../../assets/css/register.style.css';
+import { fieldEmptyValidation } from '../../../helpers/fieldEmptyValidation';
+import { emailValidation } from '../../../helpers/emailValidation';
+
 const Index = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const initialValues = { name: "", email: "", password: "" };
+    const [formValues, setFormValues] = useState(initialValues);
+    const [formErrors, setFormErrors] = useState({});
     const [status, setStatus] = useState('');
     const [message, setMessage] = useState([]);
     const [type, setType] = useState('password')
     const [eyeIcon, setEyeIcon] = useState('bi-eye');
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleType = (e) => {
@@ -27,47 +36,84 @@ const Index = () => {
         return setType('password');
     }
 
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormValues({ ...formValues, [name]: value });
+    };
+
     const handleBack = (e) => {
         e.preventDefault();
         navigate('/');
     }
 
-    const handleName = (e) => {
-        setName(e.target.value)
-    }
+    // const handleClear = () => {
+    //     setName('')
+    //     setEmail('')
+    //     setPassword('')
+    // }
 
-    const handleEmail = (e) => {
-        setEmail(e.target.value)
-    }
+    const validate = (value) => {
+      const errors = {};
 
-    const handlePassword = (e) => {
-        setPassword(e.target.value)
-    }
+      if(fieldEmptyValidation(value.name)) {
+        errors.name = 'Kolom nama tidak boleh kosong';
+      }
+  
+      if (fieldEmptyValidation(value.email)) {
+        errors.email = "Kolom email tidak boleh kosong";
+      } else if (!emailValidation(value.email)) {
+        errors.email = "Email tidak valid";
+      }
+  
+      if (fieldEmptyValidation(value.password)) {
+        errors.password = "Kolom password tidak boleh kosong";
+      }
+  
+      return errors;
+    };
 
-    const handleClear = () => {
-        setName('')
-        setEmail('')
-        setPassword('')
-    }
+    const handleSubmit = async (e) => {
+      setFormErrors(validate(formValues));
 
-    const handleSubmit = (e) => {
-        const data = {
-            name,
-            email,
-            password
+      if (Object.keys(validate(formValues)).length === 0) {
+        setIsLoading(true);
+      
+        let apiRes = null;
+        const data = formValues;
+  
+        try {
+          apiRes = await registerService(data);
+        } finally {
+          setIsLoading(false);
+  
+          if(apiRes.data.meta.status === 'success') {
+            setStatus('success');
+            setMessage('Berhasil Melakukan Registrasi')
+            setTimeout(() => {
+              navigate("/login");
+            }, 1000);
+          }else{
+            setStatus('error')
+            setMessage('Gagal Melakukan Registrasi')
+          }
         }
+      }
 
-        registerService(data).then((response) => {
-            if(response.data.meta.status === 'success'){
-                setStatus('success')
-                setMessage('Berhasil Melakukan Registrasi')
-                handleClear()
-            }else{
-                setStatus('error')
-                setMessage('Gagal Melakukan Registrasi')
-            }
-            
-        })
+
+        // registerService(data)
+        //     .then((response) => {
+        //         if(response.data.meta.status === 'success'){
+        //             setStatus('success')
+        //             setMessage('Berhasil Melakukan Registrasi')
+        //             handleClear()
+        //         }else{
+        //             setStatus('error')
+        //             setMessage('Gagal Melakukan Registrasi')
+        //         }
+        //     })
+        //     .finally(() => {
+        //         setIsLoading(false)
+        //     })
 
     }
 
@@ -78,16 +124,16 @@ const Index = () => {
                     <div className="col-6 p-0 img-block">
                         <img className=' w-100' style={{ height: "100vh", objectFit: "cover" }} src={imgLogin} alt="" />
                     </div>
-                    <div className="col-md-6 col-12 d-flex flex-column justify-content-center align-items-center ">
+                    <div className="col-md-6 col-12 d-flex flex-column justify-content-center align-items-center">
 
                         {status === 'success' 
                         ?
-                            <div class="alert alert-success" role="alert">
+                            <div class="alert alert-success w-50 text-center" role="alert">
                                 {message}
                             </div>
                         : status === 'error' 
                         ?
-                            <div class="alert alert-danger" role="alert">
+                            <div class="alert alert-danger w-50 text-center" role="alert">
                             {message}
                             </div>
                         : ''
@@ -106,8 +152,9 @@ const Index = () => {
                                 id="name"
                                 width="100%"
                                 placeholder="Masukan Nama"
-                                value={name}
-                                onChange={(value) => handleName(value)}
+                                value={formValues.name}
+                                erorr={formErrors.name}
+                                onChange={(value) => handleChange(value)}
                             />
 
                             <Input
@@ -117,8 +164,9 @@ const Index = () => {
                                 id="email"
                                 width="100%"
                                 placeholder="contoh: fulan@gmail.com"
-                                value={email}
-                                onChange={(value) => handleEmail(value)}
+                                value={formValues.email}
+                                erorr={formErrors.email}
+                                onChange={(value) => handleChange(value)}
                             />
 
                             <Input
@@ -128,20 +176,28 @@ const Index = () => {
                                 id="password"
                                 width="100%"
                                 placeholder="Masukan Password"
-                                value={password}
+                                value={formValues.password}
+                                erorr={formErrors.password}
                                 icon={`bi ${eyeIcon}`}
                                 onClick={(e) => handleType(e)}
-                                onChange={(value) => handlePassword(value)}
+                                onChange={(value) => handleChange(value)}
                             />
 
                             <div className='mt-5 mb-3 w-100'>
-                                <Button
-                                    color="#ffffff"
-                                    bg="#4B1979"
-                                    width="100%"
-                                    text="Daftar"
-                                    onClick={(e) => handleSubmit(e)}
-                                />
+                                {isLoading 
+                                    ? <Button 
+                                        color="#ffffff" 
+                                        bg="#4B1979" 
+                                        width="100%" 
+                                        icon={'https://media0.giphy.com/media/L05HgB2h6qICDs5Sms/giphy.gif?cid=ecf05e47l4kvh3wbfq7ekl58oelu5421j48s9fyiu5k8cf8n&rid=giphy.gif&ct=s'} 
+                                        disabled />
+                                    : <Button
+                                        color="#ffffff"
+                                        bg="#4B1979"
+                                        width="100%"
+                                        text="Daftar"
+                                        onClick={(e) => handleSubmit(e)} />
+                                }
                             </div>
                             <div className='register-to-login text-center'>
                                 <span>Sudah punya akun? <Link to="/login" className='text-decoration-none fw-bold' style={{ color: "purple" }}> Masuk disini</Link></span>

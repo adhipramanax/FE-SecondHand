@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { getAllProduct } from "../../../services/productService";
 import ListProduct from "../../../components/ListProductCard";
+import { productContext } from '../../../provider/productProvider';
+
 
 const Catalog = () => {
-    const [products, setProducts] = useState([]);
+    const productsValue = React.useContext(productContext);
+    // const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        getAllProduct().then((response) => setProducts(response.data.data));
+        getAllProduct().then((response) => productsValue.setProducts(response.data.data));
     }, []);
 
     // useEffect(() => {
@@ -17,7 +20,7 @@ const Catalog = () => {
         <>
             <section className="catalog">
                 <div class="container mt-4 mb-5">
-                    <ListProduct data={products} link="/product/" />
+                    <ListProduct data={productsValue.products} link="/product/" />
                 </div>
             </section>
         </>

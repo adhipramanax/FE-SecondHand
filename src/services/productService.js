@@ -3,8 +3,6 @@ import axios from "axios";
 const baseURL = "https://be-final-project-group-4-fsw-2.herokuapp.com/api/v1";
 const token = localStorage.getItem("token");
 
-console.log(token);
-
 // Buyer Service
 export async function getAllProduct() {
     try {
@@ -17,6 +15,19 @@ export async function getAllProduct() {
 export async function findProduct(id) {
     try {
         return await axios.get(`${baseURL}/product/${id}`);
+    } catch (error) {
+        return error.response;
+    }
+}
+
+export async function filterProduct(category) {
+    try {
+        if(category.includes("semua")) {
+            return await getAllProduct();
+        }else{
+
+            return await axios.get(`${baseURL}/product/filter?categories=${category}`);
+        }
     } catch (error) {
         return error.response;
     }
@@ -35,6 +46,18 @@ export async function offerProduct(data) {
 }
 
 // Seller Service
+export async function getProductSeller() {
+    try {
+        return await axios.get(`${baseURL}/seller/product`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    } catch (error) {
+        return error.response;
+    }
+}
+
 export async function getProductSold() {
     try {
         return await axios.get(`${baseURL}/seller/product/sold`, {
@@ -59,9 +82,9 @@ export async function getOfferProduct() {
     }
 }
 
-export async function getProductSeller() {
+export async function getDetailProductOffer(id) {
     try {
-        return await axios.get(`${baseURL}/seller/product`, {
+        return await axios.get(`${baseURL}/seller/product/offer/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -70,3 +93,17 @@ export async function getProductSeller() {
         return error.response;
     }
 }
+
+export async function updateStatusProduct(data, id) {
+    try {
+        console.log(id);
+        return await axios.put(`${baseURL}/seller/product/status/${id}`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    } catch (error) {
+        return error.response;
+    }
+}
+
