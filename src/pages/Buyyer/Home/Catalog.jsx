@@ -3,10 +3,8 @@ import { getAllProduct } from "../../../services/productService";
 import ListProduct from "../../../components/ListProductCard";
 import { productContext } from '../../../provider/productProvider';
 
-
 const Catalog = () => {
     const productsValue = React.useContext(productContext);
-    // const [products, setProducts] = useState([]);
 
     useEffect(() => {
         getAllProduct().then((response) => productsValue.setProducts(response.data.data));

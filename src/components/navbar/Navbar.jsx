@@ -1,5 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
+
+import { searchProduct } from "../../services/productService";
+import { productContext } from '../../provider/productProvider';
 
 // Component
 import LinkButton from "../../components/LinkButton";
@@ -14,12 +17,17 @@ import offCanvas from "../../assets/images/Frame_133.png";
 import "../../assets/css/navbar.style.css";
 
 const Index = () => {
+    const productsValue = React.useContext(productContext);
     const role = localStorage.getItem("role");
 
     const handleOnClick = (url, setRole) => {
         window.location.href = url;
         localStorage.setItem("role", setRole);
     };
+
+    const handleSearch = (e) => {
+        searchProduct(e.target.value).then((response) => productsValue.setProducts(response.data.data));
+    }
 
     return (
         <>
@@ -31,7 +39,7 @@ const Index = () => {
                             <img src={offCanvas} alt="off-canvas-image" />
                         </a>
                     </a>
-                    <input type="text" class="input-search" placeholder="cari di sini.." />
+                    <input type="text" class="input-search" placeholder="cari di sini.." onChange={value => handleSearch(value)}/>
 
                     {/* Desktop Nav Item */}
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">

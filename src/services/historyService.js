@@ -9,7 +9,7 @@ export async function getHistoryTransaction() {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
-        });   
+        });
     } catch (error) {
         return error.response;
     }

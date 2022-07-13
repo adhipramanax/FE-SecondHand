@@ -14,6 +14,7 @@ import StoreSeller from "./pages/Buyyer/StoreSeller";
 // import DetailProductbyBuyer from "./pages/Buyyer/detail product by buyer"
 
 import { AuthProvider } from "./provider/authProvider";
+import { ProductProvider } from "./provider/productProvider";
 
 function App() {
   return (
