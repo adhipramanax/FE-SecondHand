@@ -81,7 +81,15 @@ const ProductContainer = () => {
       />
       <ProductCardDetail data={product}>
         {/* Modal Button Trigger */}
-        {historyTransactionValue.historyTransaction.filter(item => item.product.id === Number(params.id) && (item.offer.offer_status) === null).length > 0 ?(
+        {historyTransactionValue.historyTransaction === null ?(
+          <ActionButton
+            color="#ffffff"
+            bg="#4B1979"
+            text="Saya tertarik dan ingin nego"
+            width="100%"
+            onClick={handleToggleModal}
+          />
+        ): historyTransactionValue.historyTransaction.filter(item => item.product.id === Number(params.id) && (item.offer.offer_status) === null).length > 0 ?(
           <DisableButton
             text="Menunggu respon penjual"
             width="100%"

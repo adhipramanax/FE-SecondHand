@@ -1,57 +1,23 @@
 import React, { useEffect, useState } from "react";
-import casioWOne from "../../../assets/images/Rectangle_24.png";
+import { getWishListProduct } from "../../../services/wishListService";
+import WishListCard from "../../../components/ListWishListCard";
 
-const Catalog = () => {
-    const [products, setProducts] = useState([]);
+const WishList = () => {
+    const [wishList, setWishList] = useState([]);
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+        getWishListProduct().then((response) => setWishList(response.data.data));
+    }, []);
 
     return (
         <>
-            <div class="col-6 col-md-4">
-                <a href="/seller/detail-product" class="text-dark text-decoration-none">
-                    <div class="card catalog-card">
-                        <img src={casioWOne} class="card-img-top" alt="jam-tangan" />
-                        <div class="card-body">
-                            <div class="card-body pt-2">
-                                <h5 className="catalog-title">Jam Tangan Casio</h5>
-                                <p class="card-text text-muted">Aksesoris</p>
-                                <h5>Rp. 250.000</h5>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-md-4">
-                <a href="/seller/detail-product" class="text-dark text-decoration-none">
-                    <div class="card catalog-card">
-                        <img src={casioWOne} class="card-img-top" alt="jam-tangan" />
-                        <div class="card-body">
-                            <div class="card-body pt-2">
-                                <h5 className="catalog-title">Jam Tangan Casio</h5>
-                                <p class="card-text text-muted">Aksesoris</p>
-                                <h5>Rp. 250.000</h5>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-md-4">
-                <a href="/seller/detail-product" class="text-dark text-decoration-none">
-                    <div class="card catalog-card">
-                        <img src={casioWOne} class="card-img-top" alt="jam-tangan" />
-                        <div class="card-body">
-                            <div class="card-body pt-2">
-                                <h5 className="catalog-title">Jam Tangan Casio</h5>
-                                <p class="card-text text-muted">Aksesoris</p>
-                                <h5>Rp. 250.000</h5>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            <section className="wish-list">
+                <div class="container mt-4 mb-5">
+                    <WishListCard data={wishList} action={false} link="/product/" />
+                </div>
+            </section>
         </>
     );
 };
 
-export default Catalog;
+export default WishList;

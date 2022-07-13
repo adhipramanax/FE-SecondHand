@@ -12,10 +12,6 @@ const Catalog = () => {
         getAllProduct().then((response) => productsValue.setProducts(response.data.data));
     }, []);
 
-    // useEffect(() => {
-    //     // console.log(products);
-    // }, [products]);
-
     return (
         <>
             <section className="catalog">
