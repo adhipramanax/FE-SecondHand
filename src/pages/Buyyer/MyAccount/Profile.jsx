@@ -101,23 +101,6 @@ const Profile = () => {
             }
 
         }
-
-
-        // updateProfile(formData, profile.id)
-        //     .then(response => {
-        //         console.log(response);
-        //         if (response.data.meta.status === "success") {
-        //             setStatus("success");
-        //             setMessage("profile berhasil diperbarui");
-        //         } else {
-        //             setStatus("error");
-        //             setMessage("terjadi kesalahan ulangi lagi nanti");
-        //         }
-        //     })
-        //     .finally(() => {
-        //         setIsLoading(false);
-        //         setShowAlert(true);
-        //     });
     };
 
     // Handling Preview File
