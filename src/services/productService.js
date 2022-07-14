@@ -20,20 +20,13 @@ export async function findProduct(id) {
     }
 }
 
-<<<<<<< HEAD
-export async function searchProduct(name) {
-    try {
-        return await axios.get(`${baseURL}/product/search?name=${name}`);
-=======
 export async function filterProduct(category) {
     try {
-        if(category.includes("semua")) {
+        if (category.includes("semua")) {
             return await getAllProduct();
-        }else{
-
+        } else {
             return await axios.get(`${baseURL}/product/filter?categories=${category}`);
         }
->>>>>>> 73760ef4771a7b327180c671bfa52c3ae062d3bc
     } catch (error) {
         return error.response;
     }
@@ -112,4 +105,3 @@ export async function updateStatusProduct(data, id) {
         return error.response;
     }
 }
-
