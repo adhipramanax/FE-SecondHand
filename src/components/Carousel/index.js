@@ -1,7 +1,15 @@
 import React from "react";
-import casio from "../../assets/images/Rectangle_134.png";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+    .img-crop{
+        object-fit: cover;
+        height: 350px;
+    }
+`
 
 const Index = ({ data }) => {
+    console.log(data);
     return (
         <>
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
@@ -14,7 +22,9 @@ const Index = ({ data }) => {
                     {data?.map((item, index) => {
                         return (
                             <div class={`carousel-item ${index === 0 ? "active" : ""}`}>
-                                <img src={item.url_photo} class="d-block w-100" alt="item-img" />
+                                <Wrapper>
+                                    <img src={item.url_photo} class="d-block w-100 img-crop" alt="item-img" />
+                                </Wrapper>
                             </div>
                         );
                     })}

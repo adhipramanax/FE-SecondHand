@@ -89,8 +89,6 @@ const Index = ({ data, onClick, index }) => {
                             bg="#4B1979"
                             text="Status"
                             width="100%"
-                            data-bs-toggle="modal"
-                            data-bs-target={`#modalStatus`}
                             data-index={index}
                             onClick={onClick}
                           />
@@ -101,8 +99,6 @@ const Index = ({ data, onClick, index }) => {
                             text="Hubungi di"
                             icon={whatsapp}
                             width="100%"
-                            data-bs-toggle="modal"
-                            data-bs-target={`#modalCall`}
                             data-index={index}
                             onClick={onClick}
                           />

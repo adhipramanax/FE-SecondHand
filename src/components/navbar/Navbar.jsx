@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Link } from "react-router-dom";
 
-import { searchProduct } from "../../services/productService";
+// import { searchProduct } from "../../services/productService";
 import { productContext } from '../../provider/productProvider';
 
 // Component
@@ -25,9 +25,9 @@ const Index = () => {
         localStorage.setItem("role", setRole);
     };
 
-    const handleSearch = (e) => {
-        searchProduct(e.target.value).then((response) => productsValue.setProducts(response.data.data));
-    }
+    // const handleSearch = (e) => {
+    //     searchProduct(e.target.value).then((response) => productsValue.setProducts(response.data.data));
+    // }
 
     return (
         <>
@@ -39,7 +39,7 @@ const Index = () => {
                             <img src={offCanvas} alt="off-canvas-image" />
                         </a>
                     </a>
-                    <input type="text" class="input-search" placeholder="cari di sini.." onChange={value => handleSearch(value)}/>
+                    <input type="text" class="input-search" placeholder="cari di sini.." onChange={''}/>
 
                     {/* Desktop Nav Item */}
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getWishListProduct } from "../../../services/wishListService";
 import WishListCard from "../../../components/ListWishListCard";
+import EmptyState from "../../../components/EmptyState";
 
 const WishList = () => {
     const [wishList, setWishList] = useState([]);
@@ -13,7 +14,7 @@ const WishList = () => {
         <>
             <section className="wish-list">
                 <div class="container mt-4 mb-5">
-                    <WishListCard data={wishList} action={false} link="/product/" />
+                    {wishList.length === 0 ? <EmptyState description={"Belum ada produk yang diminati nih, Ayo cari barangnya sekarang!"} /> : <WishListCard data={wishList} action={false} link="/product/" />}
                 </div>
             </section>
         </>

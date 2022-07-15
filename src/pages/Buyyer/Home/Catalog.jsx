@@ -14,7 +14,7 @@ const Catalog = () => {
         <>
             <section className="catalog">
                 <div class="container mt-4 mb-5">
-                    <ListProduct data={productsValue.products} link="/product/" />
+                    <ListProduct data={productsValue.products} link={true} urlLink="/product/" />
                 </div>
             </section>
         </>

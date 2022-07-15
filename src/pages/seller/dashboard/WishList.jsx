@@ -16,7 +16,7 @@ const WishList = () => {
         console.log(products);
     }, [products]);
 
-    return <>{products.length === 0 ? <EmptyState description={"Belum ada produk yang diminati nih, sabar ya!"} /> : <ListProduct data={products} link="/seller/offer/" />}</>;
+    return <>{products.length === 0 ? <EmptyState description={"Belum ada produk yang diminati nih, sabar ya!"} /> : <ListProduct data={products} link={true} urlLink="/seller/offer/" />}</>;
 };
 
 export default WishList;

@@ -1,39 +1,89 @@
 import React, {useState} from "react";
 
-import Modal from "../../../components/Modal";
-import ActionButton from "../../../components/ActionButton";
-import DisableButton from "../../../components/DisableButton";
+// Service
 import { updateStatusProduct } from "../../../services/productService";
 import { updateStatusOffer } from "../../../services/offerService";
 
+import { messageContext, alertContext, modalContext } from "./"
+
+// Component
+import Modal from "../../../components/MyModal";
+import ActionButton from "../../../components/ActionButton";
+import DisableButton from "../../../components/DisableButton";
+
+
 const ModalStatus = ({data, param}) => {
-    console.log(data);
+    const messageContextValue = React.useContext(messageContext)
+    const modalContextValue = React.useContext(modalContext)
+    const alertContextValue = React.useContext(alertContext)
+
     const [status, setStatus] = useState(null);
+
+    const handleToggleModal = () => {
+        modalContextValue.setShowModal(false)
+    }
 
     const handleStatus = (e) => {
         setStatus(e.target.value);
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if(status === 'sold'){
+            let apiRes;
             const bodyData = {
                 status_sell: true
             }
 
-            updateStatusProduct(bodyData, data?.Product?.id).then( response => console.log(response));
+            try {
+                apiRes = await updateStatusProduct(bodyData, data?.Product?.id)
+            } finally {
+                modalContextValue.setShowModal(false)
+
+                if (apiRes.data.meta.status === "success") {
+                    messageContextValue.setStatusError("success");
+                    messageContextValue.setMessage(`Status produk berhasil diperbarui`);
+                }else{
+                    messageContextValue.setStatusError("error");
+                    messageContextValue.setMessage("terjadi kesalahan ulangi lagi nanti");
+                }
+
+                setTimeout(() => {
+                    alertContextValue.setShowAlert(true);
+                }, 500);
+            }
+
         }else{
+            let apiRes;
             const bodyData = {
                 offer_status: false
             }
-    
-            updateStatusOffer(bodyData, data.id).then( () => window.location.href = `/seller/offer/product/${param}` );
+
+            try {
+                apiRes = await updateStatusOffer(bodyData, data.id)
+            } finally {
+                modalContextValue.setShowModal(false)
+
+                if (apiRes.data.meta.status === "success") {
+                    messageContextValue.setStatusError("success");
+                    messageContextValue.setMessage(`Transaksi dibatalkan`);
+                }else{
+                    messageContextValue.setStatusError("error");
+                    messageContextValue.setMessage("terjadi kesalahan ulangi lagi nanti");
+                }
+
+
+                setTimeout(() => {
+                    alertContextValue.setShowAlert(true);
+                }, 500);
+            }
+
         }
 
     }
 
   return (
     <>
-      <Modal target={`modalStatus`}>
+      <Modal show={modalContextValue.showModal} close={handleToggleModal}>
         <h5 class="mb-4">Perbarui status penjualan produkmu</h5>
         <div onChange={e => handleStatus(e)}>
             <div class="form-check">

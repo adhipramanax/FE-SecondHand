@@ -1,32 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
+import Multiselect from 'multiselect-react-dropdown';
 
-const Select = styled.select`
-    border: 1px solid #D0D0D0;
-    border-radius: 16px;
-    display: block;
-    width: 100%;
-    padding: 12px 30px 12px 10px;
-    
-    &:focus {
-        outline: none;
-        box-shadow: 0px 0px 4px #4B1979;;
-        border: 1px solid #4B1979;
+const Wrapper = styled.div`
+    margin-bottom: 30px;
+
+    .error{
+        font-size: 12px;
+        color: #FF5A5A;
+        margin-top: 5px;
     }
-` 
+`
 
 
-const Index = ({label, name, id, selected, onChange, children}) => {
+const Index = ({label, erorr, ...otherProps }) => {
     return (
-        <>
+        <Wrapper>
             <div class="mb-3">
-                <label for={id} class="form-label">{ label }</label>
-                <Select class="form-select" name={name} id={id} aria-label="Default select example" onChange={onChange}>
-                    <option selected>{selected}</option>
-                    {children}
-                </Select>
+                <label class="form-label">{ label }</label>
+                <Multiselect
+                    {...otherProps}
+                />
+                <p class="error">{erorr}</p>
             </div>
-        </>
+        </Wrapper>
     );
 }
 

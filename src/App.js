@@ -15,14 +15,20 @@ import StoreSeller from "./pages/Buyyer/StoreSeller";
 
 import { AuthProvider } from "./provider/authProvider";
 import { ProductProvider } from "./provider/productProvider";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 function App() {
+  const clientId = "343441939642-bughtvubpg682hsn420kqfavvse5vugu.apps.googleusercontent.com";
+
   return (
-    <AuthProvider>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<DetailProduct />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={
+          <GoogleOAuthProvider clientId={clientId}>
+            <Login />
+          </GoogleOAuthProvider>} 
+        />
         <Route path="/register" element={<Register />} />
         <Route path="/my-account" element={<MyAccount />} />
 
@@ -34,7 +40,6 @@ function App() {
 
         <Route path="/buyer/store" element={<StoreSeller />} />
       </Routes>
-    </AuthProvider>
   );
 }
 

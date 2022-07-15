@@ -6,7 +6,7 @@ const Index = ({data}) => {
     return (
         <>
             <div class="row mt-4">
-                {data.map((item, index) => {
+                {data?.map((item, index) => {
                     return (
                         <RectangelCard data={item} />
                     );

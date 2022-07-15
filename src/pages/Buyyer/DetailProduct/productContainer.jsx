@@ -10,12 +10,16 @@ import { historyTransactionContext } from "../../../provider/historyTransactionP
 // Component
 import ProductCardDetail from "../../../components/ProductCardDetail";
 import ActionButton from "../../../components/ActionButton";
+import OutlineButton from "../../../components/OutlineButton";
 import DisableButton from "../../../components/DisableButton";
 import Alert from "../../../components/Alert";
 import Input from "../../../components/Input";
 import Modal from "../../../components/MyModal";
 
 const ProductContainer = () => {
+  const user = JSON.parse(localStorage.getItem("payload"));
+  const wishlistValue = JSON.parse(localStorage.getItem("wishlist"));
+
   const params = useParams();
   const historyTransactionValue = React.useContext(historyTransactionContext);
   
@@ -26,6 +30,7 @@ const ProductContainer = () => {
   const [message, setMessage] = useState("");
   const [price, setPrice] = useState("");
   const [product, setProduct] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
 
   const handleToggleModal = () => {
     setShowModal(!showModal);
@@ -38,6 +43,14 @@ const ProductContainer = () => {
   const handlePrice = (e) => {
     setPrice(e.target.value);
   };
+
+  const handleWishlist = () => {
+    if(!wishlistValue) {
+      setWishlist([...wishlist, { id_product: product.id, id_user: user.id }]);
+      localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    }
+    
+  }
 
   const handleSubmit = (e) => {
     setIsLoading(true);
@@ -82,26 +95,65 @@ const ProductContainer = () => {
       <ProductCardDetail data={product}>
         {/* Modal Button Trigger */}
         {historyTransactionValue.historyTransaction === null ?(
-          <ActionButton
-            color="#ffffff"
-            bg="#4B1979"
-            text="Saya tertarik dan ingin nego"
-            width="100%"
-            onClick={handleToggleModal}
-          />
+          <div class="row">
+            <div class="col-12 mb-3">
+            <ActionButton
+              color="#ffffff"
+              bg="#4B1979"
+              text="Saya tertarik dan ingin nego"
+              width="100%"
+              onClick={handleToggleModal}
+            />
+            </div>
+            <div class="col-12">
+            <OutlineButton
+              color="#4B1979"
+              bg="#4B1979"
+              text="Simpan kedalam daftar keinginan"
+              width="100%"
+              onClick={handleWishlist}
+            />
+            </div>
+          </div>
         ): historyTransactionValue.historyTransaction.filter(item => item.product.id === Number(params.id) && (item.offer.offer_status) === null).length > 0 ?(
-          <DisableButton
-            text="Menunggu respon penjual"
-            width="100%"
-          />
+            <div class="row">
+              <div class="col-12 mb-3">
+              <DisableButton
+                text="Menunggu respon penjual"
+                width="100%"
+              />
+              </div>
+              <div class="col-12">
+              <OutlineButton
+                color="#4B1979"
+                bg="#4B1979"
+                text="Simpan kedalam daftar keinginan"
+                width="100%"
+                onClick={handleWishlist}
+              />
+              </div>
+            </div>
         ):(
-          <ActionButton
-            color="#ffffff"
-            bg="#4B1979"
-            text="Saya tertarik dan ingin nego"
-            width="100%"
-            onClick={handleToggleModal}
-          />
+          <div class="row">
+            <div class="col-12 mb-3">
+            <ActionButton
+              color="#ffffff"
+              bg="#4B1979"
+              text="Saya tertarik dan ingin nego"
+              width="100%"
+              onClick={handleToggleModal}
+            />
+            </div>
+            <div class="col-12">
+            <OutlineButton
+              color="#4B1979"
+              bg="#4B1979"
+              text="Simpan kedalam daftar keinginan"
+              width="100%"
+              onClick={handleWishlist}
+            />
+            </div>
+          </div>
         )}
         
         {/* Modal */}

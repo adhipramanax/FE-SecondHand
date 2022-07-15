@@ -1,7 +1,7 @@
 import React from "react";
 import ProductCard from "../ProductCard";
 
-const Index = ({ data, link, action = false }) => {
+const Index = ({ data, urlLink, link = false, action = false, ribbon = false, restore = false, onClick }) => {
     const role = localStorage.getItem("role");
 
     return (
@@ -21,11 +21,17 @@ const Index = ({ data, link, action = false }) => {
                 {data.map((item, index) => {
                     return (
                         <ProductCard
-                            urlImage={item.galleries[0].urlImage}
+                            id={item.id}
+                            urlImage={item.galleries[0].url_photo}
                             title={item.name}
-                            category={item.categories.map((category) => category.name + ", ")}
+                            category={item.categories.map((category) => category.name).join(', ')}
                             price={item.price}
-                            urlLink={role === "buyer" ? `${link}${item.id}` : `${link}${item.id}`}
+                            urlLink={role === "buyer" ? `${urlLink}${item.id}` : `${urlLink}${item.id}`}
+                            link={link}
+                            status={item.status_product}
+                            ribbon={ribbon}
+                            restore={restore}
+                            onClick={onClick}
                         />
                     );
                 })}

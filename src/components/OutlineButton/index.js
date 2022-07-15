@@ -26,7 +26,7 @@ const OutlineButton = ({ color, bg, text, width, icon, onClick, ...otherprops })
                     onClick={onClick}
                     {...otherprops}
                     >
-                    {icon ? <img src={icon} className="me-2" alt='Icon' /> : <></>}
+                    {icon ? <img src={icon} className="me-2" alt='Icon' width="20" /> : <></>}
                     { text }
             </Button>
         </>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://be-final-project-group-4-fsw-2.herokuapp.com/api/v1';
+const baseURL = 'http://localhost:8080/api/v1';
 
 export async function registerService( {name, email, password} ) {
     try {
@@ -21,6 +21,15 @@ export async function loginService( {email, password} ) {
             email,
             password
         })
+
+    } catch (error) {
+        return error.response
+    }
+}
+
+export async function googleService( data ) {
+    try {
+        return await axios.post(`${baseURL}/auth/google`, data)
 
     } catch (error) {
         return error.response

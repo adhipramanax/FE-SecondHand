@@ -136,7 +136,7 @@ const Profile = () => {
             <div class="col-12">
                 <div class={styles.file_upload_wrapper}>
                     <label class={styles.file_label}>
-                        {(fileUrl !== "" || fileUrl !== null) ? <img src={fileUrl} class={styles.image_preview} alt="uploaded_images" /> : <img src={defaultPic} class={styles.image_preview} alt="uploaded_images" />}
+                        {(fileUrl !== null) ? <img src={fileUrl} class={styles.image_preview} alt="uploaded_images" /> : <img src={defaultPic} class={styles.image_preview} alt="uploaded_images" />}
                         <input type="file" class={styles.file_upload} accept="image/*" name="image" onChange={(event) => handleOnChangeFile(event)} />
                     </label>
                 </div>

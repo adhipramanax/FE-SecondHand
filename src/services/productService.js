@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "https://be-final-project-group-4-fsw-2.herokuapp.com/api/v1";
+const baseURL = "http://localhost:8080/api/v1";
 const token = localStorage.getItem("token");
 
 // Buyer Service
@@ -58,6 +58,30 @@ export async function getProductSeller() {
     }
 }
 
+export async function getProductSellerInTrash() {
+    try {
+        return await axios.get(`${baseURL}/seller/product/trash`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    } catch (error) {
+        return error.response;
+    }
+}
+
+export async function createProduct(data) {
+    try {
+        return await axios.post(`${baseURL}/seller/product`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    } catch (error) {
+        return error.response;
+    }
+}
+
 export async function getProductSold() {
     try {
         return await axios.get(`${baseURL}/seller/product/sold`, {
@@ -96,8 +120,31 @@ export async function getDetailProductOffer(id) {
 
 export async function updateStatusProduct(data, id) {
     try {
-        console.log(id);
         return await axios.put(`${baseURL}/seller/product/status/${id}`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    } catch (error) {
+        return error.response;
+    }
+}
+
+export async function moveProductToTrash(id) {
+    try {
+        return await axios.delete(`${baseURL}/seller/product/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    } catch (error) {
+        return error.response;
+    }
+}
+
+export async function RestoreProduct(id, data) {
+    try {
+        return await axios.put(`${baseURL}/seller/product/restore/${id}`, data, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

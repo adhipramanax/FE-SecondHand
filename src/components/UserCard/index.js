@@ -20,13 +20,13 @@ const ProfileTextMuted = styled.p`
   margin-left: 10px;
 `;
 
-const Index = ({ data, optionCol, link  }) => {
+const Index = ({ data, optionCol, link  = '' }) => {
   return (
     <>
       <div class={`col-12 ${optionCol}`}>
         <Wrapper>
-          {link ?(
-            <a href={`/seller/offer/product/${data.id}`} class="text-dark">
+          {link !== '' ?(
+            <a href={`/seller/offer/product/${link}`} class="text-dark">
               <div class="card mt-4 card-detail">
                 <div class="card-body">
                   <div class="row">

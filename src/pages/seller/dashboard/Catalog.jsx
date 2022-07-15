@@ -9,13 +9,9 @@ const Catalog = () => {
         getProductSeller().then((response) => setProducts(response.data.data));
     }, []);
 
-    useEffect(() => {
-        console.log(products);
-    }, [products]);
-
     return (
         <>
-            <ListProduct data={products} action={true} link="/seller/product/" />
+            <ListProduct data={products} action={true} ribbon={true} link={true} urlLink="/seller/product/" />
         </>
     );
 };

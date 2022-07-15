@@ -1,21 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useGoogleLogin } from "@react-oauth/google"
+import axios from "axios"
 
-import Input from "../../../components/Input";
-import Button from "../../../components/ActionButton";
+// Service
+import { googleService, loginService } from "../../../services/authService";
 
-import imgLogin from "../../../assets/images/login.png";
-import "../../../assets/css/register.style.css";
-import { loginService } from "../../../services/authService";
+// helper
 import { emailValidation } from "../../../helpers/emailValidation";
 import { fieldEmptyValidation } from "../../../helpers/fieldEmptyValidation";
+
+// Component
+import Input from "../../../components/Input";
+import Button from "../../../components/ActionButton";
+import OutlineButton from "../../../components/OutlineButton";
+
+// Image
+import imgLogin from "../../../assets/images/login.png";
+import googleIcon from "../../../assets/images/google.png";
+
+// CSS
+import "../../../assets/css/register.style.css";
 
 const Index = () => {
   const initialValues = { email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
-  const [status, setStatus] = useState('');
-  const [message, setMessage] = useState([]);;
+  const [status, setStatus] = useState("");
+  const [message, setMessage] = useState([]);
   const [type, setType] = useState("password");
   const [eyeIcon, setEyeIcon] = useState("bi-eye");
   const [isLoading, setIsLoading] = useState(false);
@@ -58,7 +70,30 @@ const Index = () => {
     return errors;
   };
 
-  const handleValidate = async () => {
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      const userInfo = await axios.get(
+        'https://www.googleapis.com/oauth2/v3/userinfo',
+        { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } },
+      );
+
+      const data = {
+        name: userInfo.data.name,
+        email: userInfo.data.email,
+      }
+
+      googleService(data).then(response => {
+        localStorage.setItem("token", response.data.data.token);
+        localStorage.setItem("payload", JSON.stringify(response.data.data.user));
+        localStorage.setItem("isLogin", true);
+        localStorage.setItem("role", "buyer");
+        navigate("/");
+      })
+    },
+    onError: errorResponse => console.log(errorResponse),
+  });
+
+  const handleSubmit = async () => {
     setFormErrors(validate(formValues));
 
     if (Object.keys(validate(formValues)).length === 0) {
@@ -69,41 +104,20 @@ const Index = () => {
 
       try {
         apiRes = await loginService(data);
-      }finally{
+      } finally {
         setIsLoading(false);
 
-        if(apiRes.data.meta.status === 'error'){
-          setStatus('error')
-          setMessage('Email dan password tidak sesuai')
-        }else{
+        if (apiRes.data.meta.status === "error") {
+          setStatus("error");
+          setMessage("Email dan password tidak sesuai");
+        } else {
           localStorage.setItem("token", apiRes.data.data.token);
+          localStorage.setItem("payload", JSON.stringify(apiRes.data.data.user));
           localStorage.setItem("isLogin", true);
           localStorage.setItem("role", "buyer");
           navigate("/");
         }
-      
       }
-
-      
-
-      // loginService(data)
-      //   .then((response) => {
-      //     if(response.data.meta.status === 'error'){
-      //       setStatus('error')
-      //       setMessage('Email dan password tidak sesuai')
-      //     }else{
-      //       localStorage.setItem("token", response.data.token);
-      //       localStorage.setItem("isLogin", true);
-      //       localStorage.setItem("role", "buyer");
-      //     }
-
-      //   })
-      //   .finally(() => {
-      //     setIsLoading(false);
-      //     setTimeout(() => {
-      //       navigate("/");
-      //     }, 500);
-      //   });
     }
   };
 
@@ -115,12 +129,13 @@ const Index = () => {
             <img className=" w-100" style={{ height: "100vh", objectFit: "cover" }} src={imgLogin} alt="" />
           </div>
           <div className="col-md-6 col-12 d-flex flex-column justify-content-center align-items-center ">
-            {status === 'error' ? (
-                <div class="alert alert-danger w-50 text-center" role="alert">
-                  {message}
-                </div>
-              ): <></>
-            }
+            {status === "error" ? (
+              <div class="alert alert-danger w-50 text-center" role="alert">
+                {message}
+              </div>
+            ) : (
+              <></>
+            )}
             <form className="form-register-mobile">
               <svg
                 onClick={handleBack}
@@ -163,6 +178,7 @@ const Index = () => {
                 onClick={(e) => handleType(e)}
                 onChange={(value) => handleChange(value)}
               />
+
               <div className="mt-5 mb-3 w-100">
                 {isLoading ? (
                   <Button
@@ -175,7 +191,29 @@ const Index = () => {
                     disabled
                   />
                 ) : (
-                  <Button color="#ffffff" bg="#4B1979" text="Masuk" width="100%" onClick={handleValidate} />
+                  <div class="row button-group">
+                    <div class="col-12 mb-3">
+                      <Button 
+                        color="#ffffff" 
+                        bg="#4B1979" 
+                        text="Masuk" 
+                        width="100%" 
+                        onClick={handleSubmit} />
+                    </div>
+                    <div class="col-12 mb-3">
+                      <span class="separator">Atau</span>
+                    </div>
+                    <div class="col-12">
+                      <OutlineButton
+                        color="#000000"
+                        bg="#000000"
+                        text="Masuk dengan Google"
+                        width="100%"
+                        icon={googleIcon}
+                        onClick={() => googleLogin()}
+                      />
+                    </div>
+                  </div>
                 )}
               </div>
               <div className="register-to-login text-center">

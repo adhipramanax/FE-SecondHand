@@ -8,7 +8,6 @@ import MainLayout from "../../../layouts/Main.layout";
 
 const Index = () => {
     const params = useParams();
-    // console.log(params);
 
     const [users, setUsers] = useState([]);
 
@@ -20,7 +19,7 @@ const Index = () => {
         <>
             <MainLayout>
                 <div class="container">
-                    <ListUserCard data={users} optionCol="col-md-4" link={true}/>
+                    <ListUserCard data={{users, params}} optionCol="col-md-4" link={params.id}/>
                 </div>
             </MainLayout>
         </>

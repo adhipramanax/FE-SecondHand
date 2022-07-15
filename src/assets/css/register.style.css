@@ -11,6 +11,33 @@
     right: 10px;
     cursor: pointer;
 }
+
+.button-group{
+    position: relative;
+}
+
+.separator::before{
+    content: "";
+    display: inline-block;
+    position: relative;
+    top: -5px;
+    width: 40%;
+    height: 1px;
+    background-color: #000;
+    margin-right: 10px;
+}
+
+.separator::after{
+    content: "";
+    display: inline-block;
+    position: relative;
+    top: -5px;
+    width: 40%;
+    height: 1px;
+    background-color: #000;
+    margin-left: 10px;
+}
+
 @media only screen and (max-width: 576px) {
     .img-block{
         display: none;
