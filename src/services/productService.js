@@ -22,10 +22,9 @@ export async function findProduct(id) {
 
 export async function filterProduct(category) {
     try {
-        if(category.includes("semua")) {
+        if (category.includes("semua")) {
             return await getAllProduct();
-        }else{
-
+        } else {
             return await axios.get(`${baseURL}/product/filter?categories=${category}`);
         }
     } catch (error) {
