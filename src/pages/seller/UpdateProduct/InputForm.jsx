@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Multiselect from 'multiselect-react-dropdown';
 
 // Service
-import { createProduct } from "../../../services/productService"
+import { createProduct, findProduct, updateGalleryProduct, updateProduct } from "../../../services/productService"
 
 // Helper
 import { fieldEmptyValidation } from "../../../helpers/fieldEmptyValidation";
@@ -13,9 +14,7 @@ import TextArea from "../../../components/Textarea"
 import ComboBox from "../../../components/ComboBox"
 import FileUpload from "../../../components/FileUpload"
 import Button from "../../../components/ActionButton";
-import OutlineButton from "../../../components/OutlineButton"; 
 import Alert from "../../../components/Alert";
-import Preview from "./Preview";
 
 // Image
 import backBtn from "../../../assets/images/fi_arrow-left.png";
@@ -23,10 +22,10 @@ import { getAllCategory } from "../../../services/categoryService";
 
 const InputForm = () => {
     const navigate = useNavigate();
+    const params = useParams();
 
-    const initialValues = { name: "", price: "", description: "", categories: [] };
     const [categories, setCategories] = useState([]);
-    const [formValues, setFormValues] = useState(initialValues);
+    const [formValues, setFormValues] = useState('');
     const [formErrors, setFormErrors] = useState({});
     const [file, setFile] = useState([]);
     const [fileUrl, setFileUrl] = useState([]);
@@ -49,7 +48,16 @@ const InputForm = () => {
     }
 
     const handleOnChangeFile = (event) => {
-        setFile([...file, event.target.files[0]])
+        setFile([...file, {
+            id: event.target.getAttribute('data-id'),
+            index: event.target.getAttribute('data-index'),
+            image: event.target.files[0]
+        }])
+
+        let formData = new FormData();
+
+        formData.append("image", event.target.files[0]);
+        updateGalleryProduct(event.target.getAttribute('data-id'), formData).then(res => console.log(res))
     };
 
     const handleToggleAlert = () => {
@@ -88,25 +96,22 @@ const InputForm = () => {
             setIsLoading(true);
             
             let apiRes = null;
-            let formData = new FormData();
-            formData.append("name", formValues.name);
-            formData.append("price", formValues.price);
-            formData.append("description", formValues.description);
-            formData.append("categories", formValues.categories.join(','));
-            
-            file.forEach(item => {
-                formData.append("image", item);
-            })
+            const data = {
+                name: formValues.name,
+                price: formValues.price,
+                description: formValues.description,
+                categories: formValues.categories.join(',')
+            }
 
             try {
-                apiRes = await createProduct(formData);
+                apiRes = await updateProduct(params.id, data);
             } finally {
                 setIsLoading(false);
                 setShowAlert(true);
 
                 if (apiRes.data.meta.status === "success") {
                     setStatus("success");
-                    setMessage("Produk berhasil diterbitkan");
+                    setMessage("Produk berhasil diperbaharui");
                     setTimeout(() => {
                         window.location.reload();
                     }, 700);
@@ -123,22 +128,45 @@ const InputForm = () => {
         const promises = file.map((blob) => {            
             return new Promise((res) => {
               const reader = new FileReader();
-              reader.readAsDataURL(blob);
+              reader.readAsDataURL(blob.image);
     
               reader.onload = (e) => {
-                res(e.target.result);
+                res({
+                    id: blob.index,
+                    image: e.target.result,
+                });
               }        
             });            
          });
 
          Promise.all(promises).then((results) => {
-            setFileUrl(results);
+            if(results.at(-1).id  === null){
+                setFileUrl([...fileUrl, {id: null, url_photo: results.at(-1).image}]);
+            }else{
+                setFileUrl(fileUrl.map((item, index) => {
+                    if(index === Number(results.at(-1).id)) {
+                        return {...item, url_photo: results.at(-1).image};
+                    }
+    
+                    return item;
+                }));
+            }
          });
 
     }, [file]);
 
     useEffect(() => {
         getAllCategory().then(response => setCategories(response.data.data));
+        findProduct(params.id).then(response => {
+            setFormValues({
+                name: response.data.data.name,
+                price: response.data.data.price,
+                description: response.data.data.description,
+                categories: response.data.data.categories.map(item => item.id)
+            })
+            console.log(response.data.data.categories);
+            setFileUrl(response.data.data.galleries.map(item => item))
+        });
     }, []);
 
     return (
@@ -148,13 +176,13 @@ const InputForm = () => {
                 <Alert show={showAlert} close={handleToggleAlert} type={status} message={message} optionClass={'ms-5'} />
                     <div class="row d-flex flex-wrap align-content-center justify-content-center">
                         <div class="col-1 col-lg-1 mt-4">
-                            <button class="btn" onClick={() => navigate(-1)}>
+                            <button class="btn" onClick={() => {navigate(-1)}}>
                                 <img src={backBtn} alt="back-button" />
                             </button>
                         </div>
 
                         <div class="col-11 mt-4">
-                            <h5 class="text-center fw-bold">Lengkapi Detail Product</h5>
+                            <h5 class="text-center fw-bold">Pebarui Detail Product</h5>
                         </div>
                         <div class="col-12 col-lg-11 mt-4">
                             <Input
@@ -188,6 +216,11 @@ const InputForm = () => {
                                 onRemove={(value) => onRemove(value)}
                                 onSelect={(value) => onSelect(value)}
                                 erorr={formErrors.categories}
+                                selectedValues={
+                                    categories.filter(category => formValues.categories?.includes(category.id)).map(item => {
+                                        return {name: item.name, key: item.id}
+                                    })
+                                }
                             />
 
                             <TextArea 
@@ -204,10 +237,9 @@ const InputForm = () => {
                                 {/* {fileUpload} */}
                                 {fileUrl.length > 0 ?(
                                     <>
-                                        {fileUrl.map((item) => {
-                                            {console.log(item)}
+                                        {fileUrl.map((item, index) => {
                                             return (
-                                                <FileUpload fileUrl={item} onChange={(value) => handleOnChangeFile(value)} />
+                                                <FileUpload fileUrl={item.url_photo} data-id={item.id} data-index={index} onChange={(value) => handleOnChangeFile(value)} />
                                             )
                                         })}
 
@@ -225,19 +257,7 @@ const InputForm = () => {
                             </div>
                             
                             <div class="row mt-4 mb-4">
-                                <div class="col-6">
-                                    <OutlineButton
-                                        color="#4B1979"
-                                        bg="#4B1979"
-                                        width="100%"
-                                        text="Preview"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modalPreview"
-                                    />
-                                    <Preview data={{ formValues, fileUrl }} />
-                                </div>
-
-                                <div class="col-6">
+                                <div class="col-12">
                                 {isLoading 
                                     ? <Button 
                                         color="#ffffff" 
@@ -249,7 +269,7 @@ const InputForm = () => {
                                         color="#ffffff" 
                                         bg="#4B1979" 
                                         width="100%" 
-                                        text="Terbitkan" 
+                                        text="Perbarui" 
                                         onClick={handleSubmit} />
                                 }
                                 </div>

@@ -21,10 +21,10 @@ const Index = ({ data, link, action = false }) => {
                 {data.map((item, index) => {
                     return (
                         <WishListCard
-                            urlImage={item.galleries[0].urlImage}
-                            title={item.product[0].name}
+                            urlImage={item.galleries[0].url_photo}
+                            title={item.name}
                             category={item.categories.map((category) => category.name + ", ")}
-                            price={item.product[0].price}
+                            price={item.price}
                             urlLink={role === "buyer" ? `${link}${item.id}` : `${link}${item.id}`}
                         />
                     );

@@ -27,7 +27,7 @@ const Index = ({data}) => {
             <Wrapper>
                 <div class="rectange-card p-2 mb-3">
                     <div class="col-12 col-md-12 d-flex gap-3">
-                        <img src={data.galleries[0].url_photo} alt="product-image" />
+                        <img src={data.galleries[0].url_photo} alt="product-image" width={100} />
                         <div class="w-100">
                             <div class="catalog-header d-flex">
                                 <h5 className="catalog-title">{data.product.name}</h5> 

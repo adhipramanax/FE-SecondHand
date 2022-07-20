@@ -33,6 +33,13 @@ const Wrapper = styled.div`
 .danger{
     background: #FF5A5A;
 }
+
+    @media only screen and (max-width: 767px) {
+        .alert-ui{
+            left: 40%;
+            width: 80%;
+        }
+    }
 `
 
 const Index = ({show, close, type, message, optionClass}) => {

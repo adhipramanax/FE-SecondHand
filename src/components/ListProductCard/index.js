@@ -1,7 +1,7 @@
 import React from "react";
 import ProductCard from "../ProductCard";
 
-const Index = ({ data, urlLink, link = false, action = false, ribbon = false, restore = false, onClick }) => {
+const Index = ({ data, urlLink, link = false, action = false, ribbon = false, restore = false, onClick, optionCol }) => {
     const role = localStorage.getItem("role");
 
     return (
@@ -32,6 +32,7 @@ const Index = ({ data, urlLink, link = false, action = false, ribbon = false, re
                             ribbon={ribbon}
                             restore={restore}
                             onClick={onClick}
+                            optionCol={optionCol}
                         />
                     );
                 })}

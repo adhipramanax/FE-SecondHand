@@ -2,11 +2,12 @@ import React, { useState } from "react";
 
 // Component
 import IconButton from "../IconButton";
+import TextLink from '../TextLink';
 
 import styles from "../../assets/css/notif.style.module.css";
 import clock from "../../assets/images/Rectangle-33.png";
 
-const Index = () => {
+const Index = ({mobile = false}) => {
     const [isShow, setShow] = useState(false);
 
     const toggleNotif = () => {
@@ -15,6 +16,7 @@ const Index = () => {
 
     return (
         <>
+        {!mobile ? (
             <div class={`${styles.notifWrapper}`}>
                 <IconButton icon={"bi bi-bell"} onClick={toggleNotif} />
                 <div class={`${styles.notif} ${isShow ? styles.show : ""}`}>
@@ -48,6 +50,9 @@ const Index = () => {
                     </div>
                 </div>
             </div>
+        ):(
+            <TextLink to={"/notification"} text={"Notifikasi"} />
+        )}
         </>
     );
 };

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styled from "styled-components";
 import fiSearch from '../../../assets/images/fi_search.png';
 
 // Service
@@ -15,6 +16,13 @@ const filter_btn = {
     display: "inline-block",
     width: "25px"
 };
+
+const Wrapper = styled.div`
+  @media only screen and (max-width: 767px) {
+      position: relative;
+      top: 300px;
+  }
+`;
 
 const Category = () => {
     const productsValue = React.useContext(productContext);
@@ -44,11 +52,9 @@ const Category = () => {
         filterProduct(filterValue.join(',')).then(response => productsValue.setProducts(response.data.data));
     }, [filterValue]);
 
-    console.log(productsValue.products);
-
 
     return (
-        <>
+        <Wrapper>
             <section className="filter">
                 <div className="container mt-5">
                     <div className="row">
@@ -75,14 +81,14 @@ const Category = () => {
                             
                             {/* Mobile View */}
                             <Carousel mobile={true}>
-                                    <button class='item btn filter-btn active'>
+                                    <button class='item btn filter-btn active' data-slug="semua" onClick={e => handleFilter(e)}>
                                         <img src={fiSearch} class="pe-2 filter-btn__icon" style={filter_btn} alt="fi-search" />Semua
                                     </button>
 
                                     {
                                         categories.map((category, index) => {
                                             return (
-                                                <button class='item btn filter-btn'>
+                                                <button class='item btn filter-btn' data-slug={category.slug} onClick={e => handleFilter(e)}>
                                                     <img src={fiSearch} class="pe-2 filter-btn__icon" style={filter_btn} alt="fi-search" />{category.name}
                                                 </button>
                                             )
@@ -93,7 +99,7 @@ const Category = () => {
                     </div>
                 </div>
             </section>
-        </>
+        </Wrapper>
     );
 }
 

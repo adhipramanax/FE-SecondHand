@@ -24,7 +24,7 @@ const Sold = () => {
                     description={"Belum ada produk yang terjual nih, sabar ya!"}
                     />
                 ) : (
-                    <ListProduct data={products} />
+                    <ListProduct data={products} optionCol="col-md-4"/>
                 )
 
             } 

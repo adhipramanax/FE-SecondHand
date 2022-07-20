@@ -1,16 +1,24 @@
 import React from 'react';
 
-import Modal from '../../../components/Modal';
+import Modal from "../../../components/MyModal";
 import ActionButton from '../../../components/ActionButton';
 
 import profile from "../../../assets/images/Rectangle_32.png";
 import profileImg from "../../../assets/images/Rectangle-33.png";
 import whatsApp from "../../../assets/images/Whatsapp.png";
 
+import { modalContext } from "./"
+
 const ModalCall = ({data}) => {
+    const modalContextValue = React.useContext(modalContext)
+
+    const handleToggleModal = () => {
+        modalContextValue.setShowModal(false)
+    }
+
     return (
         <>
-            <Modal target={`modalCall`}>
+            <Modal show={modalContextValue.showModal} close={handleToggleModal}>
                 <h5>Yeay kamu berhasil mendapat harga yang sesuai</h5>
                 <p class="text-muted">Segera hubungi pembeli melalui whatsapp untuk transaksi selanjutnya.</p>
                 <div class="card offer-modal mb-4">

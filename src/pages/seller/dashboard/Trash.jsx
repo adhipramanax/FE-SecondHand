@@ -49,7 +49,7 @@ const Sold = () => {
                     description={"Belum ada produk disampah"}
                     />
                 ) : (
-                    <ListProduct data={products} restore={true} onClick={(e) => handleRestore(e)} />
+                    <ListProduct data={products} restore={true} optionCol="col-md-4" onClick={(e) => handleRestore(e)} />
                 )
 
             } 

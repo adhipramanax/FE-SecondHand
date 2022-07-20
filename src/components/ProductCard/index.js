@@ -63,7 +63,7 @@ const P = styled.p`
 const Index = ({ optionCol, id, urlImage, title, category, price, urlLink, link, status, ribbon, restore, onClick }) => {
   return (
     <>
-      <div class={`col-6 col-md-4 ${optionCol}`}>
+      <div class={`col-6 ${optionCol}`}>
         <Wrapper>
             {ribbon ?(
                 <div class="ribbon">

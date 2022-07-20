@@ -155,6 +155,7 @@ const Index = () => {
                   stroke-linejoin="round"
                 />
               </svg>
+              <h3 className='fw-bold mb-2 '>Masuk</h3>
               <Input
                 label="Email"
                 type="email"

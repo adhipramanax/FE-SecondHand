@@ -7,7 +7,7 @@ const Index = ({ data, optionCol, link = false }) => {
         <>
             <div class="row">
                 {data.users.map((user) => {
-                    return <UserCard data={user} optionCol={optionCol} link={link} />;
+                    return <UserCard data={user} optionCol={optionCol} link={{link, user: user.id}} />;
                 })}
             </div>
         </>

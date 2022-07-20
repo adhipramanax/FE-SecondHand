@@ -42,6 +42,9 @@ const ModalStatus = ({data, param}) => {
                 if (apiRes.data.meta.status === "success") {
                     messageContextValue.setStatusError("success");
                     messageContextValue.setMessage(`Status produk berhasil diperbarui`);
+                    setTimeout(() => {
+                        window.location.href = '/seller/store#catalog'
+                    }, 700);
                 }else{
                     messageContextValue.setStatusError("error");
                     messageContextValue.setMessage("terjadi kesalahan ulangi lagi nanti");

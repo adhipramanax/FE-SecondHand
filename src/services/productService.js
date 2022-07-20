@@ -20,6 +20,14 @@ export async function findProduct(id) {
     }
 }
 
+export async function searchProduct(productName) {
+    try {
+        return await axios.get(`${baseURL}/product/search?name=${productName}`);
+    } catch (error) {
+        return error.response;
+    }
+}
+
 export async function filterProduct(category) {
     try {
         if (category.includes("semua")) {
@@ -81,6 +89,30 @@ export async function createProduct(data) {
     }
 }
 
+export async function updateProduct(id, data) {
+    try {
+        return await axios.put(`${baseURL}/seller/product/${id}`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    } catch (error) {
+        return error.response;
+    }
+}
+
+export async function updateGalleryProduct(id, data) {
+    try {
+        return await axios.put(`${baseURL}/seller/product/gallery/${id}`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    } catch (error) {
+        return error.response;
+    }
+}
+
 export async function getProductSold() {
     try {
         return await axios.get(`${baseURL}/seller/product/sold`, {
@@ -105,9 +137,9 @@ export async function getOfferProduct() {
     }
 }
 
-export async function getDetailProductOffer(id) {
+export async function getDetailProductOffer(id, user) {
     try {
-        return await axios.get(`${baseURL}/seller/product/offer/${id}`, {
+        return await axios.get(`${baseURL}/seller/product/offer/${id}?user=${user}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

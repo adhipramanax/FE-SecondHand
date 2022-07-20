@@ -26,6 +26,7 @@ const CardOffer = () => {
 
     const [offerProduct, setOfferProduct] = useState([]);
     const [index, setIndex] = useState(null);
+    const [target, setTarget] = useState('');
 
     const handleBack = () => {
         navigate(-1);
@@ -52,7 +53,7 @@ const CardOffer = () => {
                 if (apiRes.data.meta.status === "success") {
                     messageContextValue.setStatusError("success");
                     messageContextValue.setMessage(`Penawaran dari ${offerProduct[0]?.User.name} diterima`);
-                    getDetailProductOffer(params.id).then(response => setOfferProduct(response.data.data))
+                    getDetailProductOffer(params.id, params.user).then(response => setOfferProduct(response.data.data))
                 }else{
                     messageContextValue.setStatusError("error");
                     messageContextValue.setMessage("terjadi kesalahan ulangi lagi nanti");
@@ -73,7 +74,7 @@ const CardOffer = () => {
                 if (apiRes.data.meta.status === "success") {
                     messageContextValue.setStatusError("success");
                     messageContextValue.setMessage(`Penawaran dari ${offerProduct[0]?.User.name} ditolak`);
-                    getDetailProductOffer(params.id).then(response => setOfferProduct(response.data.data))
+                    getDetailProductOffer(params.id, params.user).then(response => setOfferProduct(response.data.data))
                 }else{
                     messageContextValue.setStatusError("error");
                     messageContextValue.setMessage("terjadi kesalahan ulangi lagi nanti");
@@ -83,12 +84,14 @@ const CardOffer = () => {
     }
 
     const handleGetIndex = (e) => {
+        setTarget(e.target.getAttribute('data-target'))
         setIndex(e.target.getAttribute('data-index'))
         modalContextValue.setShowModal(!alertContextValue.showModal);
     }
 
     useEffect(() => {
-        getDetailProductOffer(params.id).then(response => setOfferProduct(response.data.data)); 
+
+        getDetailProductOffer(params.id, params.user).then(response => setOfferProduct(response.data.data)); 
     }, []);
 
     return (
@@ -120,8 +123,11 @@ const CardOffer = () => {
 
                         <h5 class="mt-4">Daftar Produkmu yang Ditawar</h5>
                         <ListOfferCard data={offerProduct} onClick={(e) => offerProduct[e.target.getAttribute('data-index')].offer_status ? handleGetIndex(e) : handleOffer(e) } />
-                        <ModalCall data={offerProduct[index]} param={params.id} />
-                        <ModalStatus data={offerProduct[index]} param={params.id} />
+                        {target === 'modalCall' ?(
+                            <ModalCall data={offerProduct[index]} param={params.id} />
+                        ):(
+                            <ModalStatus data={offerProduct[index]} param={params.id} />
+                        )}
                     </div>
                 </div>
             </div>

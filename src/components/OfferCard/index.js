@@ -90,6 +90,7 @@ const Index = ({ data, onClick, index }) => {
                             text="Status"
                             width="100%"
                             data-index={index}
+                            data-target="modalStatus"
                             onClick={onClick}
                           />
                           <span class="ms-3" />
@@ -100,6 +101,7 @@ const Index = ({ data, onClick, index }) => {
                             icon={whatsapp}
                             width="100%"
                             data-index={index}
+                            data-target="modalCall"
                             onClick={onClick}
                           />
                         </>

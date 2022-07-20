@@ -11,7 +11,14 @@ const Catalog = () => {
 
     return (
         <>
-            <ListProduct data={products} action={true} ribbon={true} link={true} urlLink="/seller/product/" />
+            <ListProduct 
+                data={products} 
+                action={true} 
+                ribbon={true} 
+                link={true} 
+                urlLink="/seller/product/" 
+                optionCol="col-md-4"
+            />
         </>
     );
 };

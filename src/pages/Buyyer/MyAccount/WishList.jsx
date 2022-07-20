@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { getWishListProduct } from "../../../services/wishListService";
+import { findProduct } from "../../../services/productService";
 import WishListCard from "../../../components/ListWishListCard";
 import EmptyState from "../../../components/EmptyState";
 
 const WishList = () => {
+    const user = JSON.parse(localStorage.getItem("payload"));
+    const wishListValue = JSON.parse(localStorage.getItem("wishlist")) || [];
+    // const [products, setProducts] = useState([]);
     const [wishList, setWishList] = useState([]);
 
     useEffect(() => {
-        getWishListProduct().then((response) => setWishList(response.data.data));
+        wishListValue.forEach(item => {
+            if(item.id_user === Number(user.id)){
+                findProduct(item.id_product).then((response) => {
+                    setWishList([...wishList, response.data.data]);
+                });
+            }
+        });
     }, []);
+
+    console.log(wishList);
 
     return (
         <>

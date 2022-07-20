@@ -26,7 +26,7 @@ const Index = ({ data, optionCol, link  = '' }) => {
       <div class={`col-12 ${optionCol}`}>
         <Wrapper>
           {link !== '' ?(
-            <a href={`/seller/offer/product/${link}`} class="text-dark">
+            <a href={`/seller/offer/product/${link.link}/user/${link.user}`} class="text-dark">
               <div class="card mt-4 card-detail">
                 <div class="card-body">
                   <div class="row">

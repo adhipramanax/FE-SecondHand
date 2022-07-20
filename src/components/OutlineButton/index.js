@@ -13,6 +13,10 @@ const Button = styled.button`
         color: ${props => props.color};
         border: 1px solid ${props => props.bg};
     }
+
+    &:focus{
+        color: ${props => props.color};
+    }
 `;
 
 const OutlineButton = ({ color, bg, text, width, icon, onClick, ...otherprops }) => {

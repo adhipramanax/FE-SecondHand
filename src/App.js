@@ -4,17 +4,15 @@ import Login from "./pages/Authorization/Login";
 import Register from "./pages/Authorization/Register";
 import Dashboard from "./pages/seller/dashboard";
 import CreateProduct from "./pages/seller/CreateProduct";
+import UpdateProduct from "./pages/seller/UpdateProduct";
 import DetailProductSeller from "./pages/seller/DetailProduct";
 import OfferProduct from "./pages/seller/OfferProduct";
 import DetailProduct from "./pages/Buyyer/DetailProduct";
 import MyAccount from "./pages/Buyyer/MyAccount";
 import DetailOffer from "./pages/seller/DetailOffer";
-import StoreSeller from "./pages/Buyyer/StoreSeller";
-// import StoreSellerViewbyBuyer from "./pages/Buyyer/StoreSellerView";
-// import DetailProductbyBuyer from "./pages/Buyyer/detail product by buyer"
 
-import { AuthProvider } from "./provider/authProvider";
-import { ProductProvider } from "./provider/productProvider";
+import PrivateRoute from "./routes/privateRoute";
+
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 function App() {
@@ -30,15 +28,42 @@ function App() {
           </GoogleOAuthProvider>} 
         />
         <Route path="/register" element={<Register />} />
-        <Route path="/my-account" element={<MyAccount />} />
+        <Route path="/my-account" element={
+          <PrivateRoute>
+            <MyAccount />
+          </PrivateRoute>
+        } />
 
-        <Route path="/seller/store" element={<Dashboard />} />
-        <Route path="/seller/create-product" element={<CreateProduct />} />
-        <Route path="/seller/product/:id" element={<DetailProductSeller />} />
-        <Route path="/seller/offer/:id" element={<DetailOffer />} />
-        <Route path="/seller/offer/product/:id" element={<OfferProduct />} />
-
-        <Route path="/buyer/store" element={<StoreSeller />} />
+        <Route path="/seller/store" element={
+          <PrivateRoute>    
+            <Dashboard />
+          </PrivateRoute>
+        } />
+        <Route path="/seller/create-product" element={
+          <PrivateRoute>  
+            <CreateProduct />
+          </PrivateRoute>
+        } />
+        <Route path="/seller/product/update/:id" element={
+          <PrivateRoute>  
+            <UpdateProduct />
+          </PrivateRoute>
+        } />
+        <Route path="/seller/product/:id" element={
+          <PrivateRoute>  
+            <DetailProductSeller />
+          </PrivateRoute>
+        } />
+        <Route path="/seller/offer/:id" element={
+          <PrivateRoute>
+            <DetailOffer />
+          </PrivateRoute>
+        } />
+        <Route path="/seller/offer/product/:id/user/:user" element={
+          <PrivateRoute>  
+            <OfferProduct />
+          </PrivateRoute>
+        } />
       </Routes>
   );
 }

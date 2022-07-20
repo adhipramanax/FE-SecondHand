@@ -98,6 +98,10 @@ const Profile = () => {
                     setStatus("error");
                     setMessage("terjadi kesalahan ulangi lagi nanti");
                 }
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 700);
             }
 
         }
@@ -133,7 +137,7 @@ const Profile = () => {
     return (
         <>
             <Alert show={showAlert} close={handleToggleAlert} type={status} message={message} optionClass={'ms-5'} />
-            <div class="col-12">
+            <div class="col-12 pb-4">
                 <div class={styles.file_upload_wrapper}>
                     <label class={styles.file_label}>
                         {(fileUrl !== null) ? <img src={fileUrl} class={styles.image_preview} alt="uploaded_images" /> : <img src={defaultPic} class={styles.image_preview} alt="uploaded_images" />}

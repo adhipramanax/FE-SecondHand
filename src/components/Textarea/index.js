@@ -30,7 +30,9 @@ const Index = ({label, name, id, erorr, onChange, placeholder, value}) => {
         <Wrapper>
             <div class="mb-3">
                 <label for={id} class="form-label">{ label }</label>
-                <TextArea class="form-control" name={name} id={id} rows="5" onChange={onChange} placeholder={placeholder}>{value}</TextArea>
+                <TextArea class="form-control" name={name} id={id} rows="5" onChange={onChange} placeholder={placeholder}>
+                    {value}
+                </TextArea>
                 <p class="error">{erorr}</p>
             </div>
         </Wrapper>
