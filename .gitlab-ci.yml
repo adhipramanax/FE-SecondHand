@@ -1,7 +1,6 @@
 stages:
   - deploy
   - staging
-  - production
 
 deploy-to-vercel:
   stage: deploy
@@ -27,23 +26,6 @@ staging:
     - $(npm bin)/cypress run --env CYPRESS_BASE_URL=$DEPLOYMENT_URL
   only:
     - dev
-
-  artifacts:
-    when: on_success
-    paths:
-      - cypress/screenshots
-      - cypress/videos
-
-production:
-  image: cypress/browsers:node12.16.2-chrome81-ff75
-  stage: production
-
-  script:
-    - DEPLOYMENT_URL=$(cat vercel_deployment_url.txt)
-    - npm ci
-    - $(npm bin)/cypress run --env CYPRESS_BASE_URL=$DEPLOYMENT_URL
-  only:
-    - master
 
   artifacts:
     when: on_success
