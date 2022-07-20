@@ -32,3 +32,4 @@ staging:
     paths:
       - cypress/screenshots
       - cypress/videos
+      
