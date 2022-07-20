@@ -24,8 +24,7 @@ staging:
     - DEPLOYMENT_URL=$(cat vercel_deployment_url.txt)
     - npm ci
     - $(npm bin)/cypress run --env CYPRESS_BASE_URL=$DEPLOYMENT_URL
-  only:
-    - dev
+
 
   artifacts:
     when: on_success
