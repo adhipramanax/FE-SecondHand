@@ -11,6 +11,14 @@ const ProfileText = styled.h5`
   font-size: 1.1rem;
   margin: 0;
   margin-left: 10px;
+  line-height: 1.5;
+`;
+
+const PriceText = styled.h5`
+  font-size: 1.1rem;
+  margin: 0;
+  margin-left: 10px;
+  line-height: 1.5;
 `;
 
 const ProfileTextMuted = styled.p`
@@ -29,12 +37,13 @@ const Index = ({ data, optionCol, link  = '' }) => {
             <a href={`/seller/offer/product/${link.link}/user/${link.user}`} class="text-dark">
               <div class="card mt-4 card-detail">
                 <div class="card-body">
-                  <div class="row">
+                  <div class="row align-items-center">
                     <div class="col-2 col-lg-2 col-md-1">
                       <img src={data?.url_photo} alt="profile" width={50} height={50} />
                     </div>
                     <div class="col-10 col-lg-9 col-md-10 d-flex flex-column justify-content-center">
                       <ProfileText class="mb-0">{data?.name}</ProfileText>
+                      <PriceText>Rp. {data?.latestOfferPrice?.offer_price}</PriceText>
                       <ProfileTextMuted class="card-text text-muted mb-0">{data?.city}</ProfileTextMuted>
                     </div>
                   </div>

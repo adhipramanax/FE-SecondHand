@@ -49,6 +49,11 @@ const Wrapper = styled.div`
   .card{
     min-height: 280px;
   }
+
+  .card-img-top{
+    max-height: 150px;
+    object-fit: cover;
+  }
 `;
 
 const H5 = styled.h5`
