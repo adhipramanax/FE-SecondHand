@@ -7,7 +7,7 @@ import TextLink from '../TextLink';
 import styles from "../../assets/css/notif.style.module.css";
 import clock from "../../assets/images/Rectangle-33.png";
 
-const Index = ({mobile = false}) => {
+const Index = ({data, mobile = false}) => {
     const [isShow, setShow] = useState(false);
 
     const toggleNotif = () => {
@@ -18,7 +18,7 @@ const Index = ({mobile = false}) => {
         <>
         {!mobile ? (
             <div class={`${styles.notifWrapper}`}>
-                <IconButton icon={"bi bi-bell"} onClick={toggleNotif} />
+                <IconButton icon={"bi bi-bell"} badge={true} text={data?.length} onClick={toggleNotif} />
                 <div class={`${styles.notif} ${isShow ? styles.show : ""}`}>
                     <div class={`${styles.notifItem}`}>
                         <div class="row">
