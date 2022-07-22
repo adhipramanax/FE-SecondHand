@@ -12,14 +12,24 @@ const Wrapper = styled.div`
         font-size: 25px;
         color: #000000;
     }
+
+    .badge{
+        position: absolute;
+        right: 15px;
+        background: red;
+        border-radius: 100%;
+        color: #ffffff;
+        font-size: .7rem;
+    }
 `;
 
-const LinkButton = ({ to, icon, onClick }) => {
+const LinkButton = ({ to, icon, text, badge = false,onClick }) => {
     return (
         <>
             <Wrapper>
                 <a href={to} onClick={onClick}>
                     <i class={icon}></i>
+                    {badge && <span class="badge">{text}</span>}
                 </a>
             </Wrapper>
         </>

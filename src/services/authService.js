@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://localhost:8080/api/v1';
+const baseURL = 'https://dev-be-group-4-fsw-2.herokuapp.com/api/v1';
 
 export async function registerService( {name, email, password} ) {
     try {

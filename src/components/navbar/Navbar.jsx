@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import decode from 'jwt-decode';
+import io from 'socket.io-client';
 
 // Service
 import { searchProduct } from "../../services/productService";
@@ -18,9 +20,15 @@ import offCanvas from "../../assets/images/Frame_133.png";
 // CSS
 import "../../assets/css/navbar.style.css";
 
+const socket = io("http://localhost:8080");
+
 const Index = () => {
     const productsValue = React.useContext(productContext);
     const role = localStorage.getItem("role");
+    const payload = JSON.parse(localStorage.getItem("payload"));
+
+    const [isConnected, setIsConnected] = useState(socket.connected);
+    const [message, setMessage] = useState([]);
 
     const handleOnClick = (url, setRole) => {
         window.location.href = url;
@@ -30,6 +38,19 @@ const Index = () => {
     const handleSearch = (e) => {
         searchProduct(e.target.value).then((response) => productsValue.setProducts(response.data.data));
     }
+
+    useEffect(() => {
+        socket.on('connect', () => {
+            setIsConnected(true);
+        });
+
+        socket.on(payload?.id.toString(), (msg) => {
+            setMessage([...message, msg])
+        })
+
+    }, [message])
+
+    console.log(message);
 
     return (
         <>
@@ -50,7 +71,7 @@ const Index = () => {
                                 <>
                                     <IconButton to={"/"} icon={"bi bi-house-door"} />
 
-                                    <Notif />
+                                    <Notif data={message} />
 
                                     <IconButton to={"/my-account#profile"} icon={"bi bi-person"} />
 
@@ -60,7 +81,7 @@ const Index = () => {
                                 <>
                                     <IconButton to={"/seller/store#catalog"} icon={"bi bi-list-ul"} />
 
-                                    <Notif />
+                                    <Notif data={message} />
 
                                     <LinkButton color={"#ffffff"} bg={"#4B1979"} text={"Beranda"} onClick={() => handleOnClick("/", "buyer")} />
                                 </>
