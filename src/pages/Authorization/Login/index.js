@@ -87,7 +87,7 @@ const Index = () => {
         localStorage.setItem("payload", JSON.stringify(response.data.data.user));
         localStorage.setItem("isLogin", true);
         localStorage.setItem("role", "buyer");
-        navigate("/");
+        window.location.href = '/'
       })
     },
     onError: errorResponse => console.log(errorResponse),
@@ -115,7 +115,7 @@ const Index = () => {
           localStorage.setItem("payload", JSON.stringify(apiRes.data.data.user));
           localStorage.setItem("isLogin", true);
           localStorage.setItem("role", "buyer");
-          navigate("/");
+          window.location.href = '/'
         }
       }
     }

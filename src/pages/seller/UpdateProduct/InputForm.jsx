@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Multiselect from 'multiselect-react-dropdown';
 
 // Service
-import { createProduct, findProduct, updateGalleryProduct, updateProduct } from "../../../services/productService"
+import { findProduct, updateGalleryProduct, updateProduct } from "../../../services/productService"
 
 // Helper
 import { fieldEmptyValidation } from "../../../helpers/fieldEmptyValidation";

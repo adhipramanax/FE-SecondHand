@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 // Component
@@ -6,6 +7,16 @@ import ActionButton from "../ActionButton";
 
 const Wrapper = styled.div`
   position: relative;
+
+  button {
+    text-align: left;
+    border: none;
+    width: 100%;
+  }
+
+  button:focus {
+    box-shadow: none;
+  }
 
   .ribbon {
     width: 100px;
@@ -66,6 +77,8 @@ const P = styled.p`
 `;
 
 const Index = ({ optionCol, id, urlImage, title, category, price, urlLink, link, status, ribbon, restore, onClick }) => {
+  const navigate = useNavigate();
+  
   return (
     <>
       <div class={`col-6 ${optionCol}`}>
@@ -92,6 +105,7 @@ const Index = ({ optionCol, id, urlImage, title, category, price, urlLink, link,
                           text="Pulihkan"
                           data-id={id}
                           onClick={onClick} 
+                          style={{textAlign: "center"}}
                       />
                     ):(
                       <></>
@@ -99,7 +113,7 @@ const Index = ({ optionCol, id, urlImage, title, category, price, urlLink, link,
                   </div>
                 </div>
           ):(    
-            <a href={urlLink} class="text-dark text-decoration-none">
+            <button type="button" class="text-dark text-decoration-none" onClick={() => navigate(urlLink)}>
               <div class="card catalog-card h-100">
                 <img src={urlImage} class="card-img-top" alt="jam-tangan" />
                 <div class="card-body">
@@ -108,7 +122,7 @@ const Index = ({ optionCol, id, urlImage, title, category, price, urlLink, link,
                   <H5>Rp. {price}</H5>
                 </div>
               </div>
-            </a>
+            </button>
           )}
         </Wrapper>
       </div>

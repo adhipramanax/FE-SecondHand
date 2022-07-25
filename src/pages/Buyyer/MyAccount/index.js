@@ -1,16 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
+
+// Provider
+import { ProfileProvider } from "../../../provider/profileProvider";
+
+// Component
+import Profile from "./Profile";
+import WishList from "./WishList";
+import HistoryTransaction from "./HistoryTransaction";
+import CardSeller from "./CardSeller";
+
+// Layout
 import MainLayout from "../../../layouts/Main.layout";
 
 // owl carousel
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import CardSeller from "./CardSeller";
-import Profile from "./Profile";
-import WishList from "./WishList";
-import HistoryTransaction from "./HistoryTransaction";
 
 const Wrapper = styled.div`
     @media only screen and (max-width: 767px) {
@@ -23,7 +30,7 @@ const Index = () => {
     let { hash } = useLocation();
 
     return (
-        <>
+        <ProfileProvider>
             <MainLayout>
                 <Wrapper>
                     <section className="store-content">
@@ -116,7 +123,7 @@ const Index = () => {
                     </section>
                 </Wrapper>
             </MainLayout>
-        </>
+        </ProfileProvider>
     );
 };
 

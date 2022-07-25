@@ -1,6 +1,11 @@
 import React from 'react';
-import MainLayout from '../../../layouts/Main.layout';
+
+// Component
 import ContentProductSale from './ContentProductSale';
+
+// Layout
+import MainLayout from '../../../layouts/Main.layout';
+
 
 const ProductSale = () => {
     return (

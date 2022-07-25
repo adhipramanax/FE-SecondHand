@@ -1,8 +1,13 @@
 import React, { useEffect } from "react";
+import jwtDecode from "jwt-decode";
 import styled from "styled-components";
+
+// Service
 import { getAllProduct } from "../../../services/productService";
-import ListProduct from "../../../components/ListProductCard";
 import { productContext } from '../../../provider/productProvider';
+
+// component
+import ListProduct from "../../../components/ListProductCard";
 
 const Wrapper = styled.div`
   @media only screen and (max-width: 767px) {
@@ -13,9 +18,14 @@ const Wrapper = styled.div`
 
 const Catalog = () => {
     const productsValue = React.useContext(productContext);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
-        getAllProduct().then((response) => productsValue.setProducts(response.data.data));
+        if(token){
+            getAllProduct(jwtDecode(token).id).then((response) => productsValue.setProducts(response.data.data));
+        }else{
+            getAllProduct().then((response) => productsValue.setProducts(response.data.data));
+        }
     }, []);
 
     return (

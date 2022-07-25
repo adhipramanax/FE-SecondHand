@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Moment from "moment";
+// import io from 'socket.io-client';
 
 // Component
 import IconButton from "../IconButton";
@@ -22,30 +24,39 @@ const Index = ({data, mobile = false}) => {
                 <div class={`${styles.notif} ${isShow ? styles.show : ""}`}>
                     <div class={`${styles.notifItem}`}>
                         <div class="row">
-                            <div class="col-2">
-                                <img src={clock} class="notif-image w-100" />
-                            </div>
-                            <div class="col-10">
-                                <div class="notif-body">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="row">
-                                                <div class="col-7">
-                                                    <p class={`${styles.notifType}`}>Penawaran produk</p>
-                                                </div>
-                                                <div class="col-5">
-                                                    <p class={`${styles.notifTime} text-end`}>20 Apr, 14:04</p>
+                            {
+                                data.map((item, index) => {
+                                    return(
+                                    <>
+                                        <div class="col-2">
+                                            <img src={clock} class="notif-image w-100" />
+                                        </div>
+                                        <div class="col-10">
+                                            <div class="notif-body">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <p class={`${styles.notifType}`}>{item.message}</p>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <p class={`${styles.notifTime} text-end`}>{Moment(item?.offer[0]?.createdAt).format("MMMM D YYYY, h:mm a")}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <h5 class={`${styles.notifProduct}`}>{item?.product[0]?.name}</h5>
+                                                        <h5 class={`${styles.notifPrice}`}>Rp {item?.product[0]?.price}</h5>
+                                                        <h5 class={`${styles.notifOffer}`}>Ditawar Rp {item?.offer[0]?.offer_price}</h5>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12">
-                                            <h5 class={`${styles.notifProduct}`}>Jam Tangan Casio</h5>
-                                            <h5 class={`${styles.notifPrice}`}>Rp 250.000</h5>
-                                            <h5 class={`${styles.notifOffer}`}>Ditawar Rp 200.000</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    </>
+
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,14 @@ const Wrapper = styled.div`
     align-items: center;
     cursor: pointer;
 
+    button {
+        padding: 0;
+    }
+
+    button:focus {
+        box-shadow: none;
+    }
+
     i {
         font-size: 25px;
         color: #000000;
@@ -27,10 +35,10 @@ const LinkButton = ({ to, icon, text, badge = false,onClick }) => {
     return (
         <>
             <Wrapper>
-                <a href={to} onClick={onClick}>
+                <button class="btn" onClick={onClick}>
                     <i class={icon}></i>
                     {badge && <span class="badge">{text}</span>}
-                </a>
+                </button>
             </Wrapper>
         </>
     );

@@ -36,6 +36,7 @@ const ProductContainer = () => {
   const [product, setProduct] = useState([]);
   const [wishlist, setWishlist] = useState(wishlistValue);
   const [isAdded, setIsAdded] = useState(wishlist.filter(item => item.id_product === Number(params.id) && item.id_user === user.id ).length > 0);
+  const [isWait, setIsWait] = useState(false)
 
   const handleToggleModal = () => {
     setShowModal(!showModal);
@@ -69,7 +70,13 @@ const ProductContainer = () => {
     setMessage("Berhasil menghapus dari dalam daftar keinginan");
     setShowAlert(true);
     setIsAdded(false)
-};
+  };
+
+  const fetchProduct = () => {
+    findProduct(params.id).then((response) => {
+      setProduct(response.data.data);
+    });
+  }
 
   const handleSubmit = (e) => {
     setIsLoading(true);
@@ -93,17 +100,24 @@ const ProductContainer = () => {
         setIsLoading(false);
         setShowModal(false);
         setShowAlert(true);
-        setTimeout(() => {
-          window.location.reload();
-        }, 700);
+        setIsWait(true);
       });
   };
 
   useEffect(() => {
-    findProduct(params.id).then((response) => {
-      setProduct(response.data.data);
-    });
-  }, []);
+    fetchProduct()
+    
+    if(isLogin){
+      if(historyTransactionValue?.historyTransaction === null){
+        setIsWait(historyTransactionValue?.historyTransaction === null);
+      }else{
+        setIsWait(historyTransactionValue?.historyTransaction.filter((item) => item.product.id === Number(params.id) && item.offer.offer_status === null).length > 0)
+      }
+
+    }else{
+      setIsWait(false)
+    }
+  }, [historyTransactionValue?.historyTransaction]);
 
   return (
     <>
@@ -139,9 +153,7 @@ const ProductContainer = () => {
                   />
                 </div>
               </div>
-            ) : historyTransactionValue.historyTransaction.filter(
-                (item) => item.product.id === Number(params.id) && item.offer.offer_status === null
-              ).length > 0 ? (
+            ) : isWait ? (
               <div class="row">
                 <div class="col-12 mb-3">
                   <DisableButton text="Menunggu respon penjual" width="100%" />

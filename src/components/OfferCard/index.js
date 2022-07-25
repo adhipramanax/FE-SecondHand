@@ -1,13 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Moment from "moment";
 import styled from "styled-components";
 
 import ActionButton from "../ActionButton";
 import OutlineButton from "../OutlineButton";
-import LinkButton from "../LinkButton";
-import Modal from "../Modal";
-
-import profile from "../../assets/images/Rectangle_32.png";
 import profileImg from "../../assets/images/Rectangle-33.png";
 import whatsapp from "../../assets/images/Whatsapp.png";
 
@@ -48,7 +44,7 @@ const Index = ({ data, onClick, index }) => {
                 <div class="col-10 col-md-10">
                   <div class="row">
                     <div class="d-flex justify-content-between">
-                      <p class="text-muted">Penawaran produk</p>
+                      <p class="text-muted">{data.offer_status === false ? "Penawaran ditolak" : data.offer_status === true ? "Penawaran diterima" : "Penawaran produk"}</p>
                       <p class="text-muted">{Moment(data.createdAt).format("MMMM D YYYY, h:mm a")}</p>
                     </div>
                   </div>

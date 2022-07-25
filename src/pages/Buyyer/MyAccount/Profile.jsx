@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 
+// Provider
+import { profileContext } from "../../../provider/profileProvider";
+
 // Service
 import { getProfile, updateProfile } from "../../../services/profileService";
 
@@ -18,9 +21,9 @@ import { numberValidation } from "../../../helpers/numberValidation";
 import { phoneNumberValidation } from "../../../helpers/phoneNumberValidation";
 
 const Profile = () => {
+    const profileValue = React.useContext(profileContext);
     const [showAlert, setShowAlert] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [profile, setProfile] = useState([]);
     const [formValues, setFormValues] = useState({});
     const [formErrors, setFormErrors] = useState({});
     const [status, setStatus] = useState("");
@@ -70,6 +73,20 @@ const Profile = () => {
         return errors;
       };
 
+    
+    const fetchProfile = () => {
+        getProfile().then(response => {
+            profileValue.setProfile(response.data.data)
+            setFormValues({
+                name: response.data.data.name,
+                city: response.data.data.city,
+                address: response.data.data.address,
+                phone: response.data.data.phone_number,
+            })
+            setFileUrl(response.data.data.url_photo)
+        });
+    }
+
     const handleSubmit = async () => {
         setFormErrors(validate(formValues));
 
@@ -86,7 +103,7 @@ const Profile = () => {
             formData.append("image", file);
             
             try {
-                apiRes = await updateProfile(formData, profile.id);
+                apiRes = await updateProfile(formData, profileValue.profile.id);
             } finally {
                 setIsLoading(false);
                 setShowAlert(true);
@@ -99,9 +116,7 @@ const Profile = () => {
                     setMessage("terjadi kesalahan ulangi lagi nanti");
                 }
 
-                setTimeout(() => {
-                    window.location.reload();
-                }, 700);
+                fetchProfile()
             }
 
         }
@@ -122,16 +137,7 @@ const Profile = () => {
     }, [file]);
 
     useEffect(() => {
-        getProfile().then(response => {
-            setProfile(response.data.data)
-            setFormValues({
-                name: response.data.data.name,
-                city: response.data.data.city,
-                address: response.data.data.address,
-                phone: response.data.data.phone_number,
-            })
-            setFileUrl(response.data.data.url_photo)
-        });
+        fetchProfile()
     }, []);
 
     return (

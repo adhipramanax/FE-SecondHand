@@ -1,12 +1,16 @@
 import axios from "axios";
 
-const baseURL = "https://dev-be-group-4-fsw-2.herokuapp.com/api/v1";
+const baseURL = "http://localhost:8080/api/v1";
 const token = localStorage.getItem("token");
 
 // Buyer Service
-export async function getAllProduct() {
+export async function getAllProduct(user) {
     try {
-        return await axios.get(`${baseURL}/product`);
+        if(user){
+            return await axios.get(`${baseURL}/product?user=${user}`);
+        }else{
+            return await axios.get(`${baseURL}/product`);
+        }
     } catch (error) {
         return error.response;
     }

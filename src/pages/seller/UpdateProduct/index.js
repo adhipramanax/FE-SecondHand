@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import MainLayout from '../../../layouts/Main.layout';
+
+// Component
 import InputForm from './InputForm';
+
+// Layout
+import MainLayout from '../../../layouts/Main.layout';
 
 const Wrapper = styled.div`
     @media only screen and (max-width: 767px) {

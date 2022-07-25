@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 
+// Service
 import { getOfferProduct } from "../../../services/productService";
 
+// Component
 import ListProduct from "../../../components/ListProductCard";
 import EmptyState from "../../../components/EmptyState";
 

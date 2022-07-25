@@ -1,7 +1,20 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  button{
+    text-align: left;
+    border: none;
+    width: 100%;
+    padding: 0;
+    background: none;
+  }
+
+  button:{
+    box-shadow: none;
+  }
+
   a {
     text-decoration: none;
   }
@@ -29,12 +42,14 @@ const ProfileTextMuted = styled.p`
 `;
 
 const Index = ({ data, optionCol, link  = '' }) => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div class={`col-12 ${optionCol}`}>
         <Wrapper>
           {link !== '' ?(
-            <a href={`/seller/offer/product/${link.link}/user/${link.user}`} class="text-dark">
+            <button type="button" class="text-dark" onClick={() => navigate(`/seller/offer/product/${link.link}/user/${link.user}`)}>
               <div class="card mt-4 card-detail">
                 <div class="card-body">
                   <div class="row align-items-center">
@@ -49,7 +64,7 @@ const Index = ({ data, optionCol, link  = '' }) => {
                   </div>
                 </div>
               </div>
-            </a>
+            </button>
           ) : (
             <div class="card mt-4 card-detail">
               <div class="card-body">
