@@ -6,6 +6,12 @@ import { profileContext } from "../../../provider/profileProvider";
 const CardSeller = () => {
     const profilevalue = React.useContext(profileContext)
 
+    const handleLogout = () => {
+        localStorage.clear();
+        window.location.href = "/";
+    }
+
+
     return (
         <>
             <section class="seller-card">
@@ -26,9 +32,9 @@ const CardSeller = () => {
                                         </div>
 
                                         <div class="col-3 col-lg-2 text-end">
-                                            <a href="" class="btn btn-color-white px-2">
+                                            <button type="button" class="btn btn-color-white px-2" onClick={() => handleLogout()}>
                                                 Logout
-                                            </a>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
