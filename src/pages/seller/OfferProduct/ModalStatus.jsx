@@ -1,10 +1,13 @@
 import React, {useState} from "react";
+import { useParams } from "react-router-dom";
+
+// Provider
+import { detailOfferContext, messageContext, alertContext, modalContext } from "./"
 
 // Service
 import { updateStatusProduct } from "../../../services/productService";
 import { updateStatusOffer } from "../../../services/offerService";
-
-import { messageContext, alertContext, modalContext } from "./"
+import { getDetailProductOffer } from "../../../services/productService";
 
 // Component
 import Modal from "../../../components/MyModal";
@@ -13,6 +16,9 @@ import DisableButton from "../../../components/DisableButton";
 
 
 const ModalStatus = ({data, param}) => {
+    const params = useParams();
+
+    const detailOfferValue = React.useContext(detailOfferContext);
     const messageContextValue = React.useContext(messageContext)
     const modalContextValue = React.useContext(modalContext)
     const alertContextValue = React.useContext(alertContext)
@@ -74,6 +80,9 @@ const ModalStatus = ({data, param}) => {
                     messageContextValue.setMessage("terjadi kesalahan ulangi lagi nanti");
                 }
 
+                getDetailProductOffer(params.id, params.user).then(response => {
+                    detailOfferValue.setOfferProduct(response.data.data)
+                })
 
                 setTimeout(() => {
                     alertContextValue.setShowAlert(true);

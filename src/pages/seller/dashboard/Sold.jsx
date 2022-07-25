@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
 
+// Service
 import { getProductSold } from '../../../services/productService';
 
+// Component
 import ListProduct from "../../../components/ListProductCard";
 import EmptyState from '../../../components/EmptyState';
 
@@ -11,10 +13,6 @@ const Sold = () => {
     useEffect(() => {
         getProductSold().then((response) => setProducts(response.data.data));
     }, []);
-
-    useEffect(() => {
-        console.log(products);
-    }, [products]);
 
     return (
         <>

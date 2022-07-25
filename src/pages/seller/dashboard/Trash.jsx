@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import { useNavigate } from "react-router-dom";
 
+// Provider
+import { messageContext, alertContext } from "./"
+
+// Service
 import { getProductSellerInTrash, RestoreProduct } from '../../../services/productService';
 
+// Component
 import ListProduct from "../../../components/ListProductCard";
 import EmptyState from '../../../components/EmptyState';
 
-import { messageContext, alertContext } from "./"
 
 const Sold = () => {
     const messageValue = React.useContext(messageContext);

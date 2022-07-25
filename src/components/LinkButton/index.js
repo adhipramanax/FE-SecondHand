@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Link = styled.a`
+const Button = styled.button`
     border: 0;
     border-radius: 16px;
     padding: 12px 24px;
@@ -10,10 +10,10 @@ const Link = styled.a`
     width: ${props => props.width};
 `;
 
-const LinkButton = ({ to, color, bg, text, width, icon, onClick }) => {
+const LinkButton = ({ color, bg, text, width, icon, onClick }) => {
     return (
         <>
-            <Link href={to} 
+            <Button type='button'
                     className='btn btn-primary'
                     color={color}
                     bg={bg}
@@ -22,7 +22,7 @@ const LinkButton = ({ to, color, bg, text, width, icon, onClick }) => {
                     >
                     {icon ? <img src={icon} className="me-2" alt='Icon' /> : <></>}
                     { text }
-            </Link>
+            </Button>
         </>
     );
 }

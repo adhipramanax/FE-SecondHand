@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
+// Service
 import { getAllOfferProduct } from "../../../services/offerService";
 
+// Component
 import ListUserCard from "../../../components/ListUserCard";
+
+// Layout
 import MainLayout from "../../../layouts/Main.layout";
 
 const Wrapper = styled.div`

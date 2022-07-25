@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
+
+// Service
 import { getProductSeller } from "../../../services/productService";
+
+// Component
 import ListProduct from "../../../components/ListProductCard";
 
 const Catalog = () => {

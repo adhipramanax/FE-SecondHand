@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { useLocation } from "react-router-dom";
-import fiUser from "../../../assets/images/fi_user.png";
-import fiBox from "../../../assets/images/fi_box.png";
-import vector from "../../../assets/images/Vector.png";
-import fiDollar from "../../../assets/images/fi_dollar-sign.png";
+import styled from "styled-components";
+
+// Provider
+import { ProfileProvider } from "../../../provider/profileProvider";
+
+// Layout
 import MainLayout from "../../../layouts/Main.layout";
 
-// owl carousel
-import OwlCarousel from "react-owl-carousel";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
+// Component
 import CardSeller from "./CardSeller";
 import Catalog from "./Catalog";
 import Profile from "./Profile";
@@ -19,10 +17,10 @@ import Sold from "./Sold";
 import Trash from "./Trash";
 import Alert from "../../../components/Alert";
 
-const filter_btn = {
-  display: "inline-block",
-  width: "25px",
-};
+// owl carousel
+import OwlCarousel from "react-owl-carousel";
+import "owl.carousel/dist/assets/owl.carousel.css";
+import "owl.carousel/dist/assets/owl.theme.default.css";
 
 const Wrapper = styled.div`
   @media only screen and (max-width: 767px) {
@@ -45,7 +43,7 @@ const Index = () => {
   };
 
   return (
-    <>
+    <ProfileProvider>
       <messageContext.Provider value={{ status, setStatus, message, setMessage }}>
         <alertContext.Provider value={{ showAlert, setShowAlert }}>
           <MainLayout>
@@ -211,7 +209,7 @@ const Index = () => {
           </MainLayout>
         </alertContext.Provider>
       </messageContext.Provider>
-    </>
+    </ProfileProvider>
   );
 };
 

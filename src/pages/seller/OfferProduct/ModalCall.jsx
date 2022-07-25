@@ -1,19 +1,26 @@
 import React from 'react';
 
+// Provider
+import { modalContext } from "./"
+
+// Component
 import Modal from "../../../components/MyModal";
 import ActionButton from '../../../components/ActionButton';
 
+// Images
 import profile from "../../../assets/images/Rectangle_32.png";
 import profileImg from "../../../assets/images/Rectangle-33.png";
 import whatsApp from "../../../assets/images/Whatsapp.png";
-
-import { modalContext } from "./"
 
 const ModalCall = ({data}) => {
     const modalContextValue = React.useContext(modalContext)
 
     const handleToggleModal = () => {
         modalContextValue.setShowModal(false)
+    }
+
+    const handleCall = () => {
+        window.open(`https://wa.me/${data?.User?.phone_number}`)
     }
 
     return (
@@ -49,7 +56,7 @@ const ModalCall = ({data}) => {
                     </div>
                 </div>
                 <div class="mt-4">
-                    <ActionButton color="#FFFFFF" bg="#4B1979" width="100%" text="Hubungi Via WhatsApp" icon={whatsApp} />
+                    <ActionButton color="#FFFFFF" bg="#4B1979" width="100%" text="Hubungi Via WhatsApp" icon={whatsApp} onClick={handleCall} />
                 </div>
             </Modal>   
         </>

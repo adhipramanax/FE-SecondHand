@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+// Provider
+import { ProductProvider } from '../../../provider/productProvider';
+
+// Layout
 import MainLayout from "../../../layouts/Main.layout";
+
+// Component
 import Carousel from "./Carousel";
 import Category from "./Category";
 import Catalog from "./Catalog";
 import ModalAlert from "../../../components/ModalAlert"
-import "../../../assets/css/home.style.css";
 
-import { ProductProvider } from '../../../provider/productProvider';
+// CSS
+import "../../../assets/css/home.style.css";
 
 const Index = () => {
     const isLogin = localStorage.getItem("isLogin");

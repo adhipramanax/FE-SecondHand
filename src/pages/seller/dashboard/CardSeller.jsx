@@ -1,15 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-import { getProfile } from "../../../services/profileService";
+// Provider
+import { profileContext } from "../../../provider/profileProvider";
 
 const CardSeller = () => {
-    const [profile, setProfile] = useState([]);
-
-    useEffect(() => {
-        getProfile().then(response => {
-            setProfile(response.data.data)
-        });
-    }, []);
+    const profileValue = React.useContext(profileContext);
 
     return (
         <>
@@ -23,10 +18,10 @@ const CardSeller = () => {
                                 <div class="card-body">
                                     <div class="row justify-content-between">
                                         <div class="col-9 col-lg-10 d-flex gap-2">
-                                            <img src={profile.url_photo} alt="profile" width={50}/>
+                                            <img src={profileValue?.profile?.url_photo} alt="profile" width={50}/>
                                             <div>
-                                                <h5 class="mb-0">{profile.name}</h5>
-                                                <p class="card-text text-muted mb-0">{profile.city}</p>
+                                                <h5 class="mb-0">{profileValue?.profile?.name}</h5>
+                                                <p class="card-text text-muted mb-0">{profileValue?.profile?.city}</p>
                                             </div>
                                         </div>
 

@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import decode from 'jwt-decode';
-import io from 'socket.io-client';
+import { useNavigate } from "react-router-dom";
+// import io from 'socket.io-client';
+
+// Provider
+import { productContext } from '../../provider/productProvider';
+import { notifContext } from "../../provider/notificationProvider";
 
 // Service
 import { searchProduct } from "../../services/productService";
-import { productContext } from '../../provider/productProvider';
 
 // Component
-import LinkButton from "../../components/LinkButton";
+import ActionButton from "../../components/ActionButton";
 import TextLink from "../../components/TextLink";
 import IconButton from "../../components/IconButton";
 import Notif from "../Notif";
@@ -20,18 +23,19 @@ import offCanvas from "../../assets/images/Frame_133.png";
 // CSS
 import "../../assets/css/navbar.style.css";
 
-const socket = io("http://localhost:8080");
+// const socket = io("http://localhost:8080");
 
 const Index = () => {
+    const navigate = useNavigate();
+    const notifValue = React.useContext(notifContext);
     const productsValue = React.useContext(productContext);
     const role = localStorage.getItem("role");
     const payload = JSON.parse(localStorage.getItem("payload"));
 
-    const [isConnected, setIsConnected] = useState(socket.connected);
-    const [message, setMessage] = useState([]);
+    // const [isConnected, setIsConnected] = useState(socket.connected);
 
     const handleOnClick = (url, setRole) => {
-        window.location.href = url;
+        navigate(url)
         localStorage.setItem("role", setRole);
     };
 
@@ -39,18 +43,16 @@ const Index = () => {
         searchProduct(e.target.value).then((response) => productsValue.setProducts(response.data.data));
     }
 
-    useEffect(() => {
-        socket.on('connect', () => {
-            setIsConnected(true);
-        });
+    // useEffect(() => {
+    //     socket.on('connect', () => {
+    //         setIsConnected(true);
+    //     });
 
-        socket.on(payload?.id.toString(), (msg) => {
-            setMessage([...message, msg])
-        })
+    //     socket.on(payload?.id.toString(), (msg) => {
+            
+    //     })
 
-    }, [message])
-
-    console.log(message);
+    // }, [message])
 
     return (
         <>
@@ -69,25 +71,25 @@ const Index = () => {
                         <div class="navbar-nav ms-auto">
                             {role === "buyer" ? (
                                 <>
-                                    <IconButton to={"/"} icon={"bi bi-house-door"} />
+                                    <IconButton icon={"bi bi-house-door"} onClick={() => navigate('/')} />
 
-                                    <Notif data={message} />
+                                    <Notif data={notifValue.notif} />
 
-                                    <IconButton to={"/my-account#profile"} icon={"bi bi-person"} />
+                                    <IconButton icon={"bi bi-person"} onClick={() => navigate('/my-account#profile')}/>
 
-                                    <LinkButton color={"#ffffff"} bg={"#4B1979"} icon={fiLogin} text={"Toko"} onClick={() => handleOnClick("/seller/store#catalog", "seller")} />
+                                    <ActionButton color={"#ffffff"} bg={"#4B1979"} icon={fiLogin} text={"Toko"} onClick={() => handleOnClick("/seller/store#catalog", "seller")} />
                                 </>
                             ) : role === "seller" ? (
                                 <>
-                                    <IconButton to={"/seller/store#catalog"} icon={"bi bi-list-ul"} />
+                                    <IconButton icon={"bi bi-list-ul"} onClick={() => navigate('/seller/store#catalog')} />
 
-                                    <Notif data={message} />
+                                    <Notif data={notifValue.notif} />
 
-                                    <LinkButton color={"#ffffff"} bg={"#4B1979"} text={"Beranda"} onClick={() => handleOnClick("/", "buyer")} />
+                                    <ActionButton color={"#ffffff"} bg={"#4B1979"} text={"Beranda"} onClick={() => handleOnClick("/", "buyer")} />
                                 </>
                             ) : (
                                 <>
-                                    <LinkButton to={"/login"} color={"#ffffff"} bg={"#4B1979"} icon={fiLogin} text={"Masuk"} />
+                                    <ActionButton color={"#ffffff"} bg={"#4B1979"} icon={fiLogin} text={"Masuk"} onClick={() => navigate('/login')} />
                                 </>
                             )}
                         </div>
@@ -112,7 +114,7 @@ const Index = () => {
 
                             <TextLink to={"/my-account"} text={"Akun Saya"} />
 
-                            <LinkButton color={"#ffffff"} bg={"#4B1979"} icon={fiLogin} text={"Toko"} onClick={() => handleOnClick("/seller/store#catalog", "seller")} />
+                            <ActionButton color={"#ffffff"} bg={"#4B1979"} icon={fiLogin} text={"Toko"} onClick={() => handleOnClick("/seller/store#catalog", "seller")} />
                         </>
                     ) : role === "seller" ? (
                         <>
@@ -120,11 +122,11 @@ const Index = () => {
 
                             <Notif mobile={true} />
 
-                            <LinkButton color={"#ffffff"} bg={"#4B1979"} text={"Beranda"} onClick={() => handleOnClick("/", "buyer")} />
+                            <ActionButton color={"#ffffff"} bg={"#4B1979"} text={"Beranda"} onClick={() => handleOnClick("/", "buyer")} />
                         </>
                     ) : (
                         <>
-                            <LinkButton to={"/login"} color={"#ffffff"} bg={"#4B1979"} icon={fiLogin} text={"Masuk"} />
+                            <ActionButton color={"#ffffff"} bg={"#4B1979"} icon={fiLogin} text={"Masuk"} onClick={() => console.log('hello')} />
                         </>
                     )}
                 </div>
